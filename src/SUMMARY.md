@@ -9,7 +9,7 @@
         - [Create a ROS Node](./ROS_Basics_with_Turtlesim/ROS_Nodes/create_a_ros_node.md)
         - [Command: rosrun](./ROS_Basics_with_Turtlesim/ROS_Nodes/command_rosrun.md)
         - [Command: rosnode](./ROS_Basics_with_Turtlesim/ROS_Nodes/command_rosnode.md)
-    - [ROS Master](./ROS_Basics_with_Turtlesim/ROS_Nodes/main.md)
+    - [ROS Master](./ROS_Basics_with_Turtlesim/ROS_Master/main.md)
     - [ROS Parameter Server](./ROS_Basics_with_Turtlesim/ROS_Parameter_Server/main.md)
         - [Load Parameters using YAML file](./ROS_Basics_with_Turtlesim/ROS_Parameter_Server/load_parameters_using_yaml_file.md)
         - [Example #1: ROS Node to Get and Set Parameters](./ROS_Basics_with_Turtlesim/ROS_Parameter_Server/ros_node_to_get_and_set_parameters.md)
