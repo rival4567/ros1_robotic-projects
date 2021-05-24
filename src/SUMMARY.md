@@ -4,7 +4,7 @@
     - [ROS Workspace](./ROS_Basics_with_Turtlesim/ROS_Workspace/main.md)
         - [Create a Catkin Workspace](./ROS_Basics_with_Turtlesim/ROS_Workspace/create_a_catkin_workspace.md)
     - [ROS Package](./ROS_Basics_with_Turtlesim/ROS_Package/main.md)
-        - [Create a ROS Package](./ROS_Basics_with_Turtlesim/ROS_Package/create_a_ROS_package) 
+        - [Create a ROS Package](./ROS_Basics_with_Turtlesim/ROS_Package/create_a_ros_package.md) 
     - [ROS Nodes](./ROS_Basics_with_Turtlesim/ROS_Nodes/main.md)
         - [Create a ROS Node](./ROS_Basics_with_Turtlesim/ROS_Nodes/create_a_ros_node.md)
         - [Command: rosrun](./ROS_Basics_with_Turtlesim/ROS_Nodes/command_rosrun.md)
