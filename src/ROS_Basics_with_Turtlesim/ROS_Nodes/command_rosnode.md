@@ -6,7 +6,7 @@
 </p>
 </blockquote>
 
-![image](./ROS_Basics_with_Turtlesim/ROS_Nodes/rosnode_1.png)
+![image](rosnode_1.png)
 
 ## list
 
@@ -56,7 +56,8 @@ rosnode info <talker_node>
 ```
 
 This should give details related to the particular node as shown below:
-![image](rosnode_info)
+
+![image](rosnode_info.png)
 
 ## kill
 
