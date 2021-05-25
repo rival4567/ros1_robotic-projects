@@ -31,5 +31,5 @@ In the preceding output, you can see information about the computer, parameter w
 ## Reading Assignment
 
 1. [ROS Wiki - Master](http://wiki.ros.org/Master)
-1. [ROS Wiki -roscore](http://wiki.ros.org/roscore)
+1. [ROS Wiki - roscore](http://wiki.ros.org/roscore)
 ---
