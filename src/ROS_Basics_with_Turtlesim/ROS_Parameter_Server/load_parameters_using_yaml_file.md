@@ -6,7 +6,7 @@ In this section we will learn how to load your own parameters in ROS Parameter S
 
 1. Navigate to `pkg_ros_basics`.
     ```bash
-    cd ~/catkin_ws/src/pkg_ros_basics
+    cd ~/workspace/src/pkg_ros_basics
     ```
     OR
     ```bash
@@ -39,20 +39,26 @@ In this section we will learn how to load your own parameters in ROS Parameter S
            first: "Heisenberg" # First Name
            last: "White" # Last Name
         contact:
-            address: "XYZ Street, XYZ" # Address
+            address: "ABQ Street, ABQ" # Address
             phone: 77777    # Contact
    ```
    - ROS Build system will create a Python Dictionary called `details`.
+
    - This dictionary will have two keys,
+
         1. Dictionary `name`
         2. Dictionary `contact`
-    - In your ROS Node you can use `rospy` to get parameters stored in this `config_my` dictionary.
-    ```python
-    param_config_my = rospy.get_param('details')
 
-    first_name = param_config_my['name']['first']
-    phone = param_config_my['contact']['phone']
-    ```
+    - In your ROS Node you can use `rospy` to get parameters stored in this `config_my` dictionary.
+
+      ```python
+      param_config_my = rospy.get_param('details')
+
+      first_name = param_config_my['name']['first']
+      phone = param_config_my['contact']['phone']
+      ```
+
+   <br />
 
 1. Now if you want to load the parameters defined in the YAML file you have to first start the ROS Parameter Server.
 
@@ -72,14 +78,14 @@ In this section we will learn how to load your own parameters in ROS Parameter S
    ```
    Output:
    ```bash
-    /details/contact/address
-    /details/contact/phone
-    /details/last
-    /details/name/first
-    /rosdistro
-    /roslaunch/uris/host_pc__37763
-    /rosversion
-    /run_id
+   /details/contact/address
+   /details/contact/phone
+   /details/name/first
+   /details/name/last
+   /rosdistro
+   /roslaunch/uris/host_ros_noetic__35261
+   /rosversion
+   /run_id
    ```
    Here you can see the first four parameters are loaded from our `config_my.yaml` file.
 
@@ -92,5 +98,7 @@ In this section we will learn how to load your own parameters in ROS Parameter S
    77777
    ```
    This is the value which we defined in the `config_my.yaml` file.
+
+   ![rosparam-load-config_my.png](./ROS_Basics_with_Turtlesim/ROS_Parameter_Server/rosparam-load-config_my.png)
 
 ---

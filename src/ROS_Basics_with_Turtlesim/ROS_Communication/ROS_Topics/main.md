@@ -19,21 +19,25 @@
 
     - In this analogy you can think,
 
-        - `OSRF <--> ROS Publisher Node`
-        OSRF which is publishing the newspaper as a Publisher Node.
+        - `OSRF <--> ROS Publisher Node`  
 
-        - `You <--> ROS Subscriber Node`
+            OSRF which is publishing the newspaper as a Publisher Node.
 
-        You along with your neighbours who are subscribed to this newspaper as Subscriber Nodes. 
+        - `You <--> ROS Subscriber Node`  
 
-        - `Jon Doe <--> ROS Topic`
-        Your paperboy who is taking the newspaper from the publisher and delivering it to its subscribers as a ROS Topic.
+            You along with your neighbours who are subscribed to this newspaper as Subscriber Nodes. 
 
-        - `The Noetic Newspaper <--> ROS Message`
-        The physical newspaper is your ROS Message.
+        - `Jon Doe <--> ROS Topic`  
+
+            Your paperboy who is taking the newspaper from the publisher and delivering it to its subscribers as a ROS Topic.
+
+        - `The Noetic Newspaper <--> ROS Message`  
+
+            The physical newspaper is your ROS Message.
         
-        - `Sports and Robotics Sections of The Noetic <--> Data Fields defined in ROS Message`
-        The sections of the newspaper is the Data Fields defined in the ROS Message.
+        - `Sports and Robotics Sections of The Noetic <--> Data Fields defined in ROS Message`  
+        
+            The sections of the newspaper is the Data Fields defined in the ROS Message.
 
 ## Reading Assignment
 

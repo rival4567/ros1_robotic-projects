@@ -7,7 +7,7 @@ To write a ROS Node to read `config_my.yaml` file loaded in ROS Parameter Server
 
 `node_param_get_set.py`
 ```python
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import rospy
 
@@ -41,8 +41,6 @@ def main():
     new_phone = rospy.get_param('/details/contact/phone')   # Get only Phone Number from Parameter Server
     rospy.loginfo(">> New Phone: {}".format(new_phone))     # Print the new Phone Number
     
-    
-
 
 if __name__ == '__main__':
     try:
@@ -51,15 +49,17 @@ if __name__ == '__main__':
         pass
 ```
 
+<br />
+
+> **NOTE**: Make sure you make the `pkg_ros_basics node_param_get_set.py` script executable.
+
 Output:
+
 ```bash
-[INFO] [1601389248.001963]: Reading from Parameter Server.
-[INFO] [1601389248.007928]: >> First Name: Hisenberg
-[INFO] [1601389248.010338]: >> Last Name: White
-[INFO] [1601389248.012679]: >> Address: XYZ Street, XYZ
-[INFO] [1601389248.014838]: >> Phone: 77777
-[INFO] [1601389248.020719]: >> New Phone: 55555
+rosrun pkg_ros_basics node_param_get_set.py
 ```
+
+![node-param-get-set-output.png](./ROS_Basics_with_Turtlesim/ROS_Parameter_Server/node-param-get-set-output.png)
 
 - The code is self-explanatory.
 - If you are not able to understand the code feel free to seek help from us.

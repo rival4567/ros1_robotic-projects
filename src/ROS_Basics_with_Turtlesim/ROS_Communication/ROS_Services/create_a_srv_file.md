@@ -24,13 +24,13 @@ Usage:
 
     The srv file is,
     ```txt
-    int64 A
-    int64 B
+    int64 a
+    int64 b
     ---
-    int64 Sum
+    int64 sum
     ```
 
-    Here `A` and `B` holds the request data which is sent by the Client to the Server and `Sum` is the response which is sent by the Server to the Client.
+    Here `a` and `b` holds the request data which is sent by the Client to the Server and `sum` is the response which is sent by the Server to the Client.
 
 1. Open `package.xml`, and make sure these two lines are in it and uncommented:
     ```xml
@@ -81,30 +81,19 @@ Usage:
     )
     ```
 
-1. Go to `catkin_ws` directory and run:
+1. Go to `workspace` directory and run:
     ```bash
-    catkin build
+    catkin_make
     ```
 
 ## rossrv Command
 
-The rossrv command-line tool displays information about ROS services. It has the exact same usage as `rosmsg` (see what it offers when it runs without sub-command below):
+The `rossrv` command-line tool displays information about ROS services. It has the exact same usage as `rosmsg` (see what it offers when it runs without sub-command below):
 
 ```bash
 rossrv -h
+rossrv show pkg_ros_basics/AddTwoInts
 ```
 
-```bash
-rossrv is a command-line tool for displaying information about ROS Service types.
-
-Commands:
-        rossrv show     Show service description
-        rossrv info     Alias for rossrv show
-        rossrv list     List all services
-        rossrv md5      Display service md5sum
-        rossrv package  List services in a package
-        rossrv packages List packages that contain services
-
-Type rossrv <command> -h for more detailed usage
-```
+![rossrv-command.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Services/rossrv-command.png)
 ---

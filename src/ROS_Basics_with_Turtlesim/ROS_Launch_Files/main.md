@@ -6,8 +6,8 @@
 
 - Launch files provides the capability to do all these stuff using a single command.
 
-- The idea is to mention all the nodes that you want to run, all the config file that you want to load etc in a single file which you can run using `roslaunch` command.
+- The idea is to mention all the nodes that you want to run, all the config file that you want to load etc. in a single file which you can run using `roslaunch` command.
 
 ## Reading Assignment
 
-1. [ROS Wiki -roslaunch](http://wiki.ros.org/roslaunch)
+1. [ROS Wiki - roslaunch](http://wiki.ros.org/roslaunch)

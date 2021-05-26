@@ -5,7 +5,7 @@
 - To launch `talker` and `listener` node present in `rospy_tutorials` package.
 - For this create a `chatter.launch` file and save it in the `launch` folder inside `pkg_ros_basics` package.
 
-**NOTE**: To install `rospy_tutorials` package in your system you can run `sudo apt-get install ros-melodic-ros-tutorials` this command.
+> **NOTE**: To install `rospy_tutorials` package in your system you can run `sudo apt-get install ros-noetic-ros-tutorials` this command.
 
 Once installed, you can use `listener` python script and talker executable written in C++ present in `rospy_tutorials` package.
 
@@ -27,4 +27,8 @@ Now run these command to run the launch file,
 ```bash
 roslaunch pkg_ros_basics chatter.launch
 ```
+
+## Output
+
+![chatter.png](./ROS_Basics_with_Turtlesim/ROS_Launch_Files/chatter.png)
 ---

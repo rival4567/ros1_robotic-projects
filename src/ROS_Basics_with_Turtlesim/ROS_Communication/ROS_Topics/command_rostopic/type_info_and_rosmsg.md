@@ -16,20 +16,20 @@ rostopic type [topic]
 
 - Lets consider the topics `/turtle1/cmd_vel`. Enter the following command to get the message type.
 
-```bash
-rostopic type /turtle1/cmd_vel
-```
+    ```bash
+    rostopic type /turtle1/cmd_vel
+    ```
 
-![rostopic-type.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/command_rostopic/rostopic-type.png)
+    ![rostopic-type.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/command_rostopic/rostopic-type.png)
 
 ## rosmsg
 
 - As you can observe the type of message associated with `/turtle1/cmd_vel` is `geometry_msgs/Twist`. let's look into more detail of the message, using `rosmsg show [messageType]` command: 
 
-```bash
-rosmsg show geometry_msgs/Twist
-```
-![rosmsg-show.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/command_rostopic/rosmsg-show.png)
+    ```bash
+    rosmsg show geometry_msgs/Twist
+    ```
+    ![rosmsg-show.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/command_rostopic/rosmsg-show.png)
 
 - A message consists of two parts, _field and constant_. Simply, **fields** is the datatype and **constants** are the representative value. From the above figure, you can observe that these _field and constants_ are displayed twice. However, both of these sections, are separate since they have a different **header** or different sub-information from the same robot. The 2 **headers** seen are...
 

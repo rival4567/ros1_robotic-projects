@@ -30,43 +30,43 @@ To write a `listener` and `talker` node which should communicate with each other
     ```
     This is the format of a typical `msg` file.
 
-1. Now open your `package.xml` file of `pkg_ros_basics` package and add in the dependencies for your `message_generation` and `message_runtime` as seen below.
+1. Now open your `package.xml` file of `pkg_ros_basics` package and add in the dependencies for your `geometry_msgs`, `message_generation` and `message_runtime` as seen below.
 
     ```xml
     <?xml version="1.0"?>
     <package format="2">
-    <name>pkg_ros_basics</name>
-    <version>0.1.0</version>
-    <description>The pkg_ey_ros_basics package</description>
+        <name>pkg_ros_basics</name>
+        <version>0.0.0</version>
+        <description>The pkg_ros_basics package</description>
 
-    <maintainer email="eyantra@todo.todo">eyantra</maintainer>
+        <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
 
-    <license>TODO</license>
+        <license>TODO</license>
 
-    <buildtool_depend>catkin</buildtool_depend>
-    <build_depend>geometry_msgs</build_depend>
-    <build_depend>rospy</build_depend>
-    <build_depend>message_generation</build_depend>
-    
-    <build_export_depend>geometry_msgs</build_export_depend>
-    <build_export_depend>rospy</build_export_depend>
-    
-    <exec_depend>geometry_msgs</exec_depend>
-    <exec_depend>rospy</exec_depend>
-    <exec_depend>message_runtime</exec_depend>
+        <buildtool_depend>catkin</buildtool_depend>
+        <build_depend>roscpp</build_depend>
+        <build_depend>rospy</build_depend>
+        <build_depend>std_msgs</build_depend>
+        <build_export_depend>roscpp</build_export_depend>
+        <build_export_depend>rospy</build_export_depend>
+        <build_export_depend>std_msgs</build_export_depend>
+        <exec_depend>roscpp</exec_depend>
+        <exec_depend>rospy</exec_depend>
+        <exec_depend>std_msgs</exec_depend>
+        <build_depend>message_generation</build_depend>
+        <exec_depend>message_runtime</exec_depend>
+        <build_depend>geometry_msgs</build_depend>
+        <exec_depend>geometry_msgs</exec_depend>
 
-
-    <!-- The export tag contains other, unspecified, tags -->
-    <export>
-        <!-- Other tools can request additional information be placed here -->
-
-    </export>
+        <export>
+        </export>
     </package>
     ```
 
 1. Now open your `CMakeList.txt` file of `pkg_ros_basics` package and navigate to the following block of code in your file.
 
     ```xml
+    # add_message_files(
     #   FILES
     #   Message1.msg
     #   Message2.msg
@@ -83,48 +83,51 @@ To write a `listener` and `talker` node which should communicate with each other
 
 
     find_package(catkin REQUIRED COMPONENTS
-    geometry_msgs
-    rospy
-    message_generation
+        roscpp
+        rospy
+        std_msgs
+        geometry_msgs
+        message_generation
     )
 
     add_message_files(
-    FILES
-    myMessage.msg
+        FILES
+        myMessage.msg
     )
 
     generate_messages(
-    DEPENDENCIES
-    geometry_msgs
-    std_msgs
+        DEPENDENCIES
+        std_msgs
+        geometry_msgs
     )
-
 
     catkin_package(
     #  INCLUDE_DIRS include
-    #  LIBRARIES control_turtle
-    CATKIN_DEPENDS geometry_msgs rospy message_runtime
-
+    #  LIBRARIES pkg_ros_basics
+        CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs message_runtime
+    #  DEPENDS system_lib
     )
 
     ###########
     ## Build ##
     ###########
 
+    ## Specify additional locations of header files
+    ## Your package locations should be listed before other locations
     include_directories(
     # include
-    ${catkin_INCLUDE_DIRS}
+        ${catkin_INCLUDE_DIRS}
     )
     ```
 
 1. After this build your package.
 
     ```bash
-    cd ~/catkin_ws
-    catkin build
+    cd ~/workspace
+    catkin_make
     ```
 
-    Once the package is build successfully you can see `myMessage.h` file located at `~/catkin_ws/devel/include/pkg_ros_basics/myMessage.h`. This will be used by ROS Nodes to communicate over a ROS Topic using `myMessage` ROS Message. 
+    Once the package is build successfully you can see `myMessage.h` file located at `~/workspace/devel/include/pkg_ros_basics/myMessage.h`. This will be used by ROS Nodes to communicate over a ROS Topic using `myMessage` ROS Message. 
 
 
 ## Code - ROS Nodes
@@ -134,7 +137,7 @@ To write a `listener` and `talker` node which should communicate with each other
 `node_myMsg_listener.py`
 
 ```python
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import rospy
 from pkg_ros_basics.msg import myMessage
@@ -171,7 +174,7 @@ if __name__ == '__main__':
 `node_myMsg_talker.py`
 
 ```python
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import rospy
 from pkg_ros_basics.msg import myMessage
@@ -232,52 +235,14 @@ If you follow the steps given above, you should see the following output
 rosrun pkg_ros_basics node_myMsg_talker.py 
 ```
 
-```bash
-[INFO] [1601406458.926833]: Publishing: 
-[INFO] [1601406458.929838]: id: 1
-name: "my_message"
-temperature: 10.7699381016
-humidity: 20.5365646883
-[INFO] [1601406459.928043]: Publishing: 
-[INFO] [1601406459.931639]: id: 1
-name: "my_message"
-temperature: 10.510987459
-humidity: 20.4537870911
-[INFO] [1601406460.927918]: Publishing: 
-[INFO] [1601406460.930950]: id: 1
-name: "my_message"
-temperature: 10.1001665043
-humidity: 20.2251078658
-[INFO] [1601406461.928028]: Publishing: 
-[INFO] [1601406461.934640]: id: 1
-name: "my_message"
-temperature: 10.8662984056
-humidity: 20.527154066
-[INFO] [1601406462.928025]: Publishing: 
-[INFO] [1601406462.931750]: id: 1
-name: "my_message"
-temperature: 10.3771277955
-humidity: 20.8530501433
-[INFO] [1601406463.927601]: Publishing: 
-[INFO] [1601406463.928682]: id: 1
-name: "my_message"
-temperature: 10.6145392272
-humidity: 20.8280485139
-```   
+![node-myMsg-talker.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/node-myMsg-talker.png)
 
 <br />  
 ```bash
 rosrun pkg_ros_basics node_myMsg_listener.py
 ```
 
-```bash
-[INFO] [1601406458.933924]: Data Received: (1, my_message, 10.77, 20.54)
-[INFO] [1601406459.936372]: Data Received: (1, my_message, 10.51, 20.45)
-[INFO] [1601406460.934484]: Data Received: (1, my_message, 10.10, 20.23)
-[INFO] [1601406461.935742]: Data Received: (1, my_message, 10.87, 20.53)
-[INFO] [1601406462.936444]: Data Received: (1, my_message, 10.38, 20.85)
-[INFO] [1601406463.929752]: Data Received: (1, my_message, 10.61, 20.83)
-```
+![node-myMsg-listener.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/node-myMsg-listener.png)
 
 - If you face any problems while following this tutorial you can feel free to reach out to us. 
 ---
