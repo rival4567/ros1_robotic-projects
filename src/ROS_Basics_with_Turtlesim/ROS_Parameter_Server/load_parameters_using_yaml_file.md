@@ -12,6 +12,7 @@ In this section we will learn how to load your own parameters in ROS Parameter S
     ```bash
     roscd pkg_ros_basics
     ```
+
     > **NOTE**: `roscd` will work only if you have sourced `setup.bash` of your catkin workspace.
 
 1. Create a `config` folder for your Python scripts and navigate into the folder.
