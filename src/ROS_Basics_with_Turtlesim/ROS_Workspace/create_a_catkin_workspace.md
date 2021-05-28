@@ -1,23 +1,17 @@
 # Create a Catkin Workspace
 1. Open up the terminal `shortcut key: ctrl+alt+t`.
-2. Create the root workspace directory. You can name your directory anything but by ROS convention we will use `catkin_ws` as the name.
+2. Create the root workspace directory. You can name your directory anything we are using `workspace` as the name this time.
 ```bash
 cd ~/
-mkdir --parents catkin_ws/src
-cd catkin_ws
+mkdir -p ~/workspace/src
+cd workspace
 ```
-3. Initialize the catkin workspace.
+3. Run the following command:
 ```bash
-catkin init
-
+catkin_make
 ```
-Look for the statement **“Workspace configuration appears valid”**, showing that your catkin workspace was created successfully. If you forgot to create the `src` directory, or did not run `catkin init` from the workspace root (both common mistakes), you’ll get an error message like **“WARNING: Source space does not yet exist"**.
-4. Build the workspace.
-```bash
-cd ~/catkin_ws
-catkin build
-```
-5. Now your catkin workspace will have additional directories `build, devel, logs`.
+4. The catkin_make command is a convenience tool for working with catkin workspaces. Running it the first time in your workspace, it will create a CMakeLists.txt link in your 'src' folder.
+5. Additionally, if you look in your current directory you should now have a 'build' and 'devel' folder.
 ```bash
 ls
 ```
@@ -28,8 +22,10 @@ source ~/catkin_ws/devel/setup.bash
 By doing this, all the packages that you create inside the `src` folder will be visible to ROS.
 7. This `setup.bash` file of your workspace must be source everytime when you want to use ROS packages created inside this workspace.
 
-To save typing, add this to your `.bashrc`,
-   1. `gedit ~/.bashrc`
-   2. Add to the end: `source ~/catkin_ws/devel/setup.bash`
-   3. Save and close the editor.
+8. To make sure your workspace is properly overlayed by the setup script, make sure ROS_PACKAGE_PATH environment variable includes the directory you're in.
+
+```bash
+echo $ROS_PACKAGE_PATH
+/home/youruser/catkin_ws/src:/opt/ros/kinetic/share
+```
 <hr>
