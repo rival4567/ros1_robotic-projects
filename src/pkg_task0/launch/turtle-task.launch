@@ -9,5 +9,5 @@
     <!-- <node pkg="rosservice" type="rosservice" name="spawn_another_turtle" args="call /spawn '{x: 2.0, y: 2.0, theta: 0.2, name: &quot;turtle2&quot;}'" />
     <node pkg="rosservice" type="rosservice" name="turtle1_set_pen" args="call /turtle1/set_pen '{r: 170, g: 170, b: 0, width: 2}'" /> -->
     <node pkg="turtlesim" type="turtle_teleop_key" name="node_turtle_teleop_key" output="screen" />
-    <node pkg="pkg_task0" type="node_catch_me_turtle.py" name="node_catch_me_turtle" output="screen" />
+    <node pkg="pkg_task0" type="node_catch_the_turtle.py" name="node_catch_the_turtle" output="screen" />
 </launch>
