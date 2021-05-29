@@ -49,4 +49,5 @@
         - [Understanding ROS topics](./Additional_Sections/ros_topics.md)
         - [Understanding ROS services](./Additional_Sections/ros_services.md)
 - [Tasks](./tasks/main.md)
-    - [Task 1](./tasks/task1.md)
+    - [Problem Statement](./tasks/turtle-task.md)
+    - [Expected Output](./tasks/expected-output.md)
