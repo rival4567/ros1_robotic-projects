@@ -49,4 +49,4 @@
         - [Understanding ROS topics](./Additional_Sections/ros_topics.md)
         - [Understanding ROS services](./Additional_Sections/ros_services.md)
 - [Tasks](./tasks/main.md)
-    - [Task 1](./tasks/task1.md)
+    - [task 2](./tasks/task_2/main.md)
