@@ -26,6 +26,6 @@ By doing this, all the packages that you create inside the `src` folder will be 
 
 ```bash
 echo $ROS_PACKAGE_PATH
-/home/youruser/catkin_ws/src:/opt/ros/kinetic/share
+/home/youruser/catkin_ws/src:/opt/ros/noetic/share
 ```
 <hr>
