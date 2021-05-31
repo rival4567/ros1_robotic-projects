@@ -92,7 +92,7 @@
   The following code can be found in actionlib_tutorials/simple_action_servers/fibonacci_server.py, and implements a python action server for the fibonacci action.
 
   ```python
-  #! /usr/bin/env python
+  #! /usr/bin/env python3
    
   import rospy
    
@@ -166,7 +166,7 @@
   The following code can be found in [actionlib_tutorials](https://github.com/ros/common_tutorials/blob/hydro-devel/actionlib_tutorials/scripts/fibonacci_client.py) repository, and implements a simple python action client for the fibonacci action.
 
   ```python
-  #! /usr/bin/env python
+  #! /usr/bin/env python3
 
   from __future__ import print_function
 
