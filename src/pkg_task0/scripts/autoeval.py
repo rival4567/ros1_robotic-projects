@@ -4,6 +4,9 @@ import rosbag
 import math
 import csv
 
+# USAGE: rosrun pkg_task0 autoeval.py
+# It will create a results.csv to the location where all bag_files is located.
+
 
 def evaluate_score(bag):
     '''This method evaulates scores by looking into bag files. It then
