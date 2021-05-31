@@ -5,7 +5,7 @@
 
 1. First, navigate to the source space directory of the catkin workspace you've created.
    ```bash
-   cd ~/catkin_ws/src
+   cd ~/workspace/src
    ```
 2. Now, use the catkin_create_pkg script to create a new package called pkg_ros_basics which depends on std_msgs, roscpp, and rospy:
    ```bash
@@ -20,8 +20,8 @@
 
 3. Now, you need to build the packages in the catkin workspace:
    ```bash
-   cd ~/catkin_ws
-   catkin build
+   cd ~/workspace
+   catkin_make
    ```
 
 - Inside the package, there are `src` folder, `package.xml`, `CMakeLists.txt`, and the `include` folders.
