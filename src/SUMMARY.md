@@ -50,3 +50,11 @@
         - [Understanding ROS services](./Additional_Sections/ros_services.md)
 - [Tasks](./tasks/main.md)
     - [task 2](./tasks/task_2/main.md)
+        - [Problem Statement](./tasks/task_2/problem_statement.md)
+        - [Expected Output](./tasks/task_2/expected_output.md)
+        - [Recording Logs](./tasks/task_2/recording-logs.md)
+        - [Solution](./tasks/task_2/solution.md)
+        - [Autoeval script](./tasks/task_2/autoeval_script.md)
+        
+
+        

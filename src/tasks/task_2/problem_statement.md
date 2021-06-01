@@ -1,6 +1,6 @@
 # Problem Statement
 
-  - The objective of this task is to Create Ros Action server and client with the help of which you will draw shapes inside the turtlesim window. For this Taks you have to make a square shape with radius (distance of centeroid from a vertex) = 2 units.
+  - The objective of this task is to Create Ros Action server and client with the help of which you will draw shapes inside the turtlesim window. For this Taks you have to send a goal to ther server to make a square shape with radius (distance of centeroid from a vertex) = 1 units and after waiting for two seconds send anpther goal to draw a circle with radius 2 which will preempt the current gaol.
 
   - You are supposed to do this by creating a server side script `shape_server.py` and a client side script `shape_client.py` and also a `.action` file called `DrawShape.action`.
 
@@ -34,7 +34,9 @@
   roslaunch pkg_task0 task0.launch 
 
   ```
-  7. The client side script will give shape 'square' and radius '2' as goals to the server. The server should draw a square with the required dimensions and stop at the initial position.
+  7. The client side script will give shape 'square' and radius '1' as goals to the server. The server should start drawing a square with the required dimensions.
+
+  8. After waiting for 2 seconds you should send another goal to draw a circle with radius '2', which will preempt the current gaol and start drawing the circle
 
 ## Hints
 
@@ -55,6 +57,13 @@
   	rotate towards objective
   	error_theta = objective.theta - current_theta
 
+  ```
+
+  4. To wait for a certain time limit you can use rospy.Rate() function, for example:
+  ```python
+  r = rospy.Rate(1) # 1 Hz (frequency)
+  r.sleep() # sleep for 1 second
+  
   ```
 
 <hr>
