@@ -6,9 +6,9 @@
 
 Services are another method of communication for nodes in the ROS graph. Services are based on a call-and-response model, versus topics’ publisher-subscriber model. While topics allow nodes to subscribe to data streams and get continual updates, services only provide data when they are specifically called by a client.
 
-![Service-SingleServiceClient.gif](./Additional_Sections/Service-SingleServiceClient.gif)
+![Service-SingleServiceClient.gif](Service-SingleServiceClient.gif)
 
-![Service-MultipleServiceClient.gif](./Additional_Sections/Service-MultipleServiceClient.gif)
+![Service-MultipleServiceClient.gif](Service-MultipleServiceClient.gif)
 
 ## Prerequisites
 
@@ -54,7 +54,7 @@ Running the `rosservice list` command in a new terminal will return a list of al
 /turtlesim/set_logger_level
 ```
 
-For now, let’s focus on the turtlesim-specific services, `/clear`, `/kill`, `/reset`, `/spawn`, `/turtle1/set_pen`, `/turtle1/teleport_absolute`, and `/turtle1/teleport_relative`. You may recall interacting with some of these services using rqt in the `[[“Introducing turtlesim and rqt”](./Additional_Sections/introducing_turtlesim_and_rqt.html) tutorial.
+For now, let’s focus on the turtlesim-specific services, `/clear`, `/kill`, `/reset`, `/spawn`, `/turtle1/set_pen`, `/turtle1/teleport_absolute`, and `/turtle1/teleport_relative`. You may recall interacting with some of these services using rqt in the `[[“Introducing turtlesim and rqt”](introducing_turtlesim_and_rqt.html) tutorial.
 
 ### 3 rosservice type
 
@@ -162,9 +162,9 @@ rosservice call /clear
 
 This command will clear the turtlesim window of any lines your turtle has drawn.
 
-![rosservice-call-clear-before.png](./Additional_Sections/rosservice-call-clear-before.png)
+![rosservice-call-clear-before.png](rosservice-call-clear-before.png)
 
-![rosservice-call-clear-after.png](./Additional_Sections/rosservice-call-clear-after.png)
+![rosservice-call-clear-after.png](rosservice-call-clear-after.png)
 
 Now let’s spawn a new turtle by calling `/spawn` and inputting arguments. Input `<arguments>` in a service call from the command-line need to be in YAML syntax.
 
@@ -182,7 +182,7 @@ name: "turtle2"
 
 Your turtlesim window will update with the newly spawned turtle right away:
 
-![rosservice-call-spawn.png](./Additional_Sections/rosservice-call-spawn.png)
+![rosservice-call-spawn.png](rosservice-call-spawn.png)
 
 ## Summary
 

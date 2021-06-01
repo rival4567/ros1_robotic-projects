@@ -6,11 +6,11 @@
 
 ROS breaks complex systems down into many modular nodes. Topics are a vital element of the ROS graph that act as a bus for nodes to exchange messages.
 
-![topic-single-publisher-and-single-subscriber.gif](./Additional_Sections/topic-single-publisher-and-single-subscriber.gif)
+![topic-single-publisher-and-single-subscriber.gif](topic-single-publisher-and-single-subscriber.gif)
 
 A node may publish data to any number of topics and simultaneously have subscriptions to any number of topics.
 
-![topic-multiple.gif](./Additional_Sections/topic-multiple.gif)
+![topic-multiple.gif](topic-multiple.gif)
 
 Topics are one of the important ways that data moves between nodes, and therefore between different parts of the system.
 
@@ -49,7 +49,7 @@ rqt_graph
 
 You can also open `rqt_graph` by opening rqt and selecting **Plugins** > **Introspection** > **Nodes Graph**.
 
-![rqt-graph-rostopic.png](./Additional_Sections/rqt-graph-rostopic.png)
+![rqt-graph-rostopic.png](rqt-graph-rostopic.png)
 
 You should see the above nodes and topic. If you hover your mouse over the topic in the center, you’ll see the color highlighting like in the image above.
 
@@ -84,7 +84,7 @@ geometry_msgs/Twist
 
 If you’re wondering where all these topics are in rqt_graph, you can uncheck all the boxes under Hide:
 
-![rqt-graph-unhidden.png](./Additional_Sections/rqt-graph-unhidden.png)
+![rqt-graph-unhidden.png](rqt-graph-unhidden.png)
 
 For now, though, leave those options checked to avoid confusion.
 
@@ -120,7 +120,7 @@ angular:
 
 Now return to rqt_graph and uncheck the Debug box.
 
-![rqt-graph-cli.png](./Additional_Sections/rqt-graph-cli.png)
+![rqt-graph-cli.png](rqt-graph-cli.png)
 
 `/rostopic_2309_1622187461192` is the node created by the `echo` we just ran (the number will change). Now you can see that the publisher is publishing data over the `cmd_vel` topic, and two subscribers are subscribed.
 
@@ -216,7 +216,7 @@ publishing and latching message for 3.0 seconds
 
 And you will see your turtle move like so:
 
-![turtle1-rostopic-pub-once.png](./Additional_Sections/turtle1-rostopic-pub-once.png)
+![turtle1-rostopic-pub-once.png](turtle1-rostopic-pub-once.png)
 
 The turtle (and commonly the real robots which it is meant to emulate) require a steady stream of commands to operate continuously. So, to get the turtle to keep moving, you can run:
 
@@ -226,11 +226,11 @@ rostopic pub -r 1 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0, y: 0.0
 
 The difference here is the removal of the `-1` option and the addition of the `--rate 1` option, which tells `rostopic pub` to publish the command in a steady stream at 1 Hz.
 
-![turtle1-rostopic-pub.gif](./Additional_Sections/turtle1-rostopic-pub.gif)
+![turtle1-rostopic-pub.gif](turtle1-rostopic-pub.gif)
 
 You can refresh **rqt_graph** to see what’s happening graphically. You will see the `rostopic pub ... ` node (`/rostopic_3050_1622189437717`) is publishing over the `/turtle1/cmd_vel` topic, and is being received by both the `rostopic echo ... ` node (`/rostopic_2309_1622187461192`) and the `/turtlesim node` now.
 
-![rqt_graph-pub.png](./Additional_Sections/rqt_graph-pub.png)
+![rqt_graph-pub.png](rqt_graph-pub.png)
 
 Finally, you can run `echo` on the `pose` topic and recheck rqt_graph:
 
@@ -238,7 +238,7 @@ Finally, you can run `echo` on the `pose` topic and recheck rqt_graph:
 rostopic echo /turtle1/pose
 ```
 
-![rqt_graph-echo-pose.png](./Additional_Sections/rqt_graph-echo-pose.png)
+![rqt_graph-echo-pose.png](rqt_graph-echo-pose.png)
 
 In this case, `/turtlesim` is now publishing to the `pose` topic, and a new `echo` node is subscribed.
 

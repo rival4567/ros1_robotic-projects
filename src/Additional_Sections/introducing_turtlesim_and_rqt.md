@@ -12,7 +12,7 @@ This tutorial touches on core ROS concepts, like the separation of nodes, topics
 
 ## Prerequisites
 
-The previous tutorial, [Configuring your ROS environment](./Additional_Sections/configuring_your_ros_environment.html), will show you how to set up your environment.
+The previous tutorial, [Configuring your ROS environment](configuring_your_ros_environment.html), will show you how to set up your environment.
 
 ## Tasks
 
@@ -32,7 +32,7 @@ rosrun turtlesim turtlesim_node
 
 The simulator window should appear, with a random turtle in the center.
 
-![turtlesim_node-turtle1.png](./Additional_Sections/turtlesim_node-turtle1.png)
+![turtlesim_node-turtle1.png](turtlesim_node-turtle1.png)
 
 In the terminal under the command, you will see messages from the node:
 
@@ -91,7 +91,7 @@ Give the new turtle a unique name, like `turtle2` by double-clicking between the
 
 Enter new coordinates for the turtle to spawn at, like `x = 1.0` and `y = 1.0`.
 
-![rqt-spawn-turtle2.png](./Additional_Sections/rqt-spawn-turtle2.png)
+![rqt-spawn-turtle2.png](rqt-spawn-turtle2.png)
 
 > **Note**: If you try to spawn a new turtle with the same name as an existing turtle, like your default `turtle1`, you will get an error message in the terminal running `turtlesim_node`:
 
@@ -109,7 +109,7 @@ If you refresh the service list in rqt, you will also see that now there are ser
 
 Now let’s give turtle1 a unique pen using the `/set_pen` service:
 
-![rqt-set-pen-turtle1.png](./Additional_Sections/rqt-set-pen-turtle1.png)
+![rqt-set-pen-turtle1.png](rqt-set-pen-turtle1.png)
 
 The values for **r**, **g** and **b**, between 0 and 255, will set the color of the pen turtle1 draws with, and **width** sets the thickness of the line.
 
@@ -117,7 +117,7 @@ To have turtle1 draw with a distinct red line, change the value of **r** to 255,
 
 If you return to the terminal where `turtle_teleop_node` is running and press the arrow keys, you will see turtle1’s pen has changed.
 
-![turtlesim-set-pen-turtle1.png](./Additional_Sections/turtlesim-set-pen-turtle1.png)
+![turtlesim-set-pen-turtle1.png](turtlesim-set-pen-turtle1.png)
 
 You’ve probably noticed that there’s no way to move turtle2. You can accomplish this by remapping turtle1’s `cmd_vel` topic onto turtle2.
 
@@ -133,7 +133,7 @@ rosrun turtlesim turtlesim_node __name:=turtle2 --ros-args --remap turtle1/cmd_v
 
 Now you can move turtle2 when this terminal is active, and turtle1 when the other terminal running the `turtle_teleop_key` is active.
 
-![turtlesim-two-turtles.png](./Additional_Sections/turtlesim-two-turtles.png)
+![turtlesim-two-turtles.png](turtlesim-two-turtles.png)
 
 ### Close turtlesim
 
