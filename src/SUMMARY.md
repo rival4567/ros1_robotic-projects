@@ -55,3 +55,4 @@
         - [Recording Logs](./tasks/task0/recording-logs.md)
         - [Solution](./tasks/task0/solution.md)
         - [Autoeval script](./tasks/task0/autoeval.md)
+    - [task 2](./tasks/task_2/main.md)
