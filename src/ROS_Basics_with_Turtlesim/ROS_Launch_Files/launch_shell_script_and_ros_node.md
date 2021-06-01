@@ -22,7 +22,7 @@ echo "** Opening $URL1 in Firefox **"
 firefox -new-window $URL1 
 ```
 
-<center><a href="ROS_Basics_with_Turtlesim/ROS_Launch_Files/webpage_launch.sh" download><button>Download</button></a></center>
+<center><a href="webpage_launch.sh" download><button>Download</button></a></center>
 
 `node_hello_ros.py`
 
@@ -45,7 +45,7 @@ if __name__ == '__main__':
         pass
 ```
 
-<center><a href="ROS_Basics_with_Turtlesim/ROS_Launch_Files/node_hello_ros.py" download><button>Download</button></a></center>
+<center><a href="node_hello_ros.py" download><button>Download</button></a></center>
 
 
 > **NOTE**: You need to make these shell script and python script executable using `chmod` before using it in a launch file.
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 </launch>
 ```
 
-<center><a href="ROS_Basics_with_Turtlesim/ROS_Launch_Files/web_node.launch" download="web_node.launch"><button type="button">Download</button></a></center>
+<center><a href="web_node.launch" download="web_node.launch"><button type="button">Download</button></a></center>
 
 ## Run Command
 ```bash
@@ -72,9 +72,10 @@ roslaunch pkg_ros_basics web_node.launch
 
 ## Output
 
-![web_node.png](./ROS_Basics_with_Turtlesim/ROS_Launch_Files/web_node.png)
+![web_node.png](web_node.png)
 
 <br />
 - The code is self-explanatory.
 - If you are not able to understand the code feel free to seek help from us.
+
 ---

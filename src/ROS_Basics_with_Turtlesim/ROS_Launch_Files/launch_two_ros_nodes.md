@@ -19,7 +19,7 @@ Once installed, you can use `listener` python script and talker executable writt
 </launch>
 ```
 
-<center><a href="ROS_Basics_with_Turtlesim/ROS_Launch_Files/chatter.launch" download><button>Download</button></a></center>
+<center><a href="chatter.launch" download><button>Download</button></a></center>
 
 - Here first `talker.cpp` file (for cpp file we dont need to add .cpp extension) has been included with the node name as talker and also set output as screen so you can see the output from talker node.
 - Next we have added `listener.py` which has node name as listener and here also we have set output as screen.
@@ -33,5 +33,6 @@ roslaunch pkg_ros_basics chatter.launch
 
 ## Output
 
-![chatter.png](./ROS_Basics_with_Turtlesim/ROS_Launch_Files/chatter.png)
+![chatter.png](chatter.png)
+
 ---

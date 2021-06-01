@@ -1,7 +1,7 @@
 # Example #1: ROS Node to Get and Set Parameters
 
 ## Aim
-To write a ROS Node to read `config_my.yaml` file loaded in ROS Parameter Server ([done here](./ROS_Basics_with_Turtlesim/ROS_Parameter_Server/load_parameters_using_yaml_file.html#Load-Parameters-using-YAML-file)), print it on the console and modify the phone number.
+To write a ROS Node to read `config_my.yaml` file loaded in ROS Parameter Server ([done here](load_parameters_using_yaml_file.html#Load-Parameters-using-YAML-file)), print it on the console and modify the phone number.
 
 ## Code
 
@@ -49,7 +49,7 @@ if __name__ == '__main__':
         pass
 ```
 
-<center><a href="./ROS_Basics_with_Turtlesim/ROS_Parameter_Server/node_param_get_set.py" download><button>Download</button></a></center>
+<center><a href="node_param_get_set.py" download><button>Download</button></a></center>
 
 <br />
 
@@ -61,7 +61,7 @@ Output:
 rosrun pkg_ros_basics node_param_get_set.py
 ```
 
-![node-param-get-set-output.png](./ROS_Basics_with_Turtlesim/ROS_Parameter_Server/node-param-get-set-output.png)
+![node-param-get-set-output.png](node-param-get-set-output.png)
 
 - The code is self-explanatory.
 - If you are not able to understand the code feel free to seek help from us.

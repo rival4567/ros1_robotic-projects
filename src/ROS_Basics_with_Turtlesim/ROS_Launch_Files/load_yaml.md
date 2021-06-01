@@ -18,7 +18,7 @@
 </launch>
 ```
 
-<center><a href="ROS_Basics_with_Turtlesim/ROS_Launch_Files/load_yaml.launch" download><button type="button">Download</button></a></center>
+<center><a href="load_yaml.launch" download><button type="button">Download</button></a></center>
 
 ## Run Command
 
@@ -28,9 +28,10 @@ roslaunch pkg_ros_basics load_yaml.launch
 
 ## Output
 
-![load_yaml.png](./ROS_Basics_with_Turtlesim/ROS_Launch_Files/load_yaml.png)
+![load_yaml.png](load_yaml.png)
 
 <br />
 - The code is self-explanatory.
 - If you are not able to understand the code feel free to seek help from us.
+
 ---

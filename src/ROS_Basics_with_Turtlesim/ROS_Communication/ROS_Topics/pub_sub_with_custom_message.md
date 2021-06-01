@@ -28,7 +28,7 @@ To write a `listener` and `talker` node which should communicate with each other
     float32 temperature
     float32 humidity
     ```
-    <center><a href="./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/myMessage.msg" download><button>Download</button></a></center>
+    <center><a href="myMessage.msg" download><button>Download</button></a></center>
 
     This is the format of a typical `msg` file.
 
@@ -64,7 +64,7 @@ To write a `listener` and `talker` node which should communicate with each other
         </export>
     </package>
     ```
-    <center><a href="./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/package.xml" download><button>Download</button></a></center>
+    <center><a href="package.xml" download><button>Download</button></a></center>
 
 1. Now open your `CMakeList.txt` file of `pkg_ros_basics` package and navigate to the following block of code in your file.
 
@@ -122,7 +122,7 @@ To write a `listener` and `talker` node which should communicate with each other
         ${catkin_INCLUDE_DIRS}
     )
     ```
-    <center><a href="./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/CMakeLists.txt" download><button>Download</button></a></center>
+    <center><a href="CMakeLists.txt" download><button>Download</button></a></center>
 
 1. After this build your package.
 
@@ -173,7 +173,7 @@ if __name__ == '__main__':
         pass
 ```
 
-<center><a href="./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/node_myMsg_listener.py" download><button>Download</button></a></center>
+<center><a href="node_myMsg_listener.py" download><button>Download</button></a></center>
 
 ### Talker Node
 
@@ -225,7 +225,7 @@ if __name__ == '__main__':
         pass
 ```
 
-<center><a href="./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/node_myMsg_talker.py" download><button>Download</button></a></center>
+<center><a href="node_myMsg_talker.py" download><button>Download</button></a></center>
 
 ## Output
 
@@ -243,14 +243,14 @@ If you follow the steps given above, you should see the following output
 rosrun pkg_ros_basics node_myMsg_talker.py 
 ```
 
-![node-myMsg-talker.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/node-myMsg-talker.png)
+![node-myMsg-talker.png](node-myMsg-talker.png)
 
 <br />  
 ```bash
 rosrun pkg_ros_basics node_myMsg_listener.py
 ```
 
-![node-myMsg-listener.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/node-myMsg-listener.png)
+![node-myMsg-listener.png](node-myMsg-listener.png)
 
 - If you face any problems while following this tutorial you can feel free to reach out to us. 
 ---

@@ -28,7 +28,7 @@
     
 </launch>
 ```
-<center><a href="tasks/task0/turtle-task.launch" download><button>Download</button></a></center>
+<center><a href="turtle-task.launch" download><button>Download</button></a></center>
 
 `node_catch_the_turtle.py`
 
@@ -147,6 +147,6 @@ if __name__ == '__main__':
         pass
 ```
 
-<center><a href="tasks/task0/node_catch_the_turtle.py" download><button>Download</button></a></center>
+<center><a href="node_catch_the_turtle.py" download><button>Download</button></a></center>
 
 ---

@@ -42,7 +42,7 @@ In this section we will learn how to load your own parameters in ROS Parameter S
             address: "ABQ Street, ABQ" # Address
             phone: 77777    # Contact
    ```
-   <center><a href="./ROS_Basics_with_Turtlesim/ROS_Parameter_Server/config_my.yaml" download><button>Download</button></a></center>
+   <center><a href="config_my.yaml" download><button>Download</button></a></center>
    
    - ROS Build system will create a Python Dictionary called `details`.
 
@@ -101,6 +101,6 @@ In this section we will learn how to load your own parameters in ROS Parameter S
    ```
    This is the value which we defined in the `config_my.yaml` file.
 
-   ![rosparam-load-config_my.png](./ROS_Basics_with_Turtlesim/ROS_Parameter_Server/rosparam-load-config_my.png)
+   ![rosparam-load-config_my.png](rosparam-load-config_my.png)
 
 ---

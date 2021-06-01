@@ -32,7 +32,7 @@ Usage:
 
     Here `a` and `b` holds the request data which is sent by the Client to the Server and `sum` is the response which is sent by the Server to the Client.
 
-    <center><a href="./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Services/AddTwoInts.srv" download><button>Download</button></a></center>
+    <center><a href="AddTwoInts.srv" download><button>Download</button></a></center>
 
 1. Open `package.xml`, and make sure these two lines are in it and uncommented:
     ```xml
@@ -83,7 +83,7 @@ Usage:
     )
     ```
 
-<center><a href="./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Services/CMakeLists.txt" download><button>Download CMakeLists.txt</button></a></center>
+<center><a href="CMakeLists.txt" download><button>Download CMakeLists.txt</button></a></center>
 
 
 1. Go to `workspace` directory and run:
@@ -100,5 +100,6 @@ rossrv -h
 rossrv show pkg_ros_basics/AddTwoInts
 ```
 
-![rossrv-command.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Services/rossrv-command.png)
+![rossrv-command.png](rossrv-command.png)
+
 ---

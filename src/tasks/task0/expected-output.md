@@ -2,13 +2,13 @@
 
 - The following videos can be considered as a valid output.
 
-![expected-output.gif](./tasks/task0/expected-output.gif)
+![expected-output.gif](expected-output.gif)
 
 > **Note**: First, let `turtle2` reach `turtle1` then only move `turtle1`.
 
 - To know whether the nodes are talking to each other as expected one can use the command `rqt_graph`. Below, you can find an expected graph for this task.
 
-![rqt_graph-output.png](./tasks/task0/rqt_graph-output.png)
+![rqt_graph-output.png](rqt_graph-output.png)
 
 - Your terminal should look like this at the startup of roslaunch server.
 

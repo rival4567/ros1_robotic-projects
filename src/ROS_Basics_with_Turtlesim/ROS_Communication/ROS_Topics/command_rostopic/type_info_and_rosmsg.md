@@ -20,7 +20,7 @@ rostopic type [topic]
     rostopic type /turtle1/cmd_vel
     ```
 
-    ![rostopic-type.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/command_rostopic/rostopic-type.png)
+    ![rostopic-type.png](rostopic-type.png)
 
 ## rosmsg
 
@@ -29,7 +29,7 @@ rostopic type [topic]
     ```bash
     rosmsg show geometry_msgs/Twist
     ```
-    ![rosmsg-show.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/command_rostopic/rosmsg-show.png)
+    ![rosmsg-show.png](rosmsg-show.png)
 
 - A message consists of two parts, _field and constant_. Simply, **fields** is the datatype and **constants** are the representative value. From the above figure, you can observe that these _field and constants_ are displayed twice. However, both of these sections, are separate since they have a different **header** or different sub-information from the same robot. The 2 **headers** seen are...
 
@@ -54,7 +54,7 @@ rostopic info /turtle1/cmd_vel
     - the message **type** and
     - the nodes which are publishing it or subscribing it.
 
-![rostopic-info.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/command_rostopic/rostopic-info.png)
+![rostopic-info.png](rostopic-info.png)
 
 ---
 

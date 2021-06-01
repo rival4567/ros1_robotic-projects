@@ -18,7 +18,7 @@ rostopic echo [topic]
 rostopic list -p
 ```
 
-![rostopic-list-p.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/command_rostopic/rostopic-list-p.png)
+![rostopic-list-p.png](rostopic-list-p.png)
 
 - From the `-p` we know 2 topic is being published
 
@@ -27,7 +27,7 @@ rostopic list -p
 
 - Let's see more into the `/turtle1/pose` topic. 
 
-![rostopic-info-turtle1-pose.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/command_rostopic/rostopic-info-turtle1-pose.png)
+![rostopic-info-turtle1-pose.png](rostopic-info-turtle1-pose.png)
 
 - Luckily the pose information of turtle from the turtlesim is being published on the topic `/turtle1/pose`. 
 
@@ -37,6 +37,6 @@ rostopic list -p
 rostopic echo /turtle1/pose
 ```
 
-![rostopic-echo.png](./ROS_Basics_with_Turtlesim/ROS_Communication/ROS_Topics/command_rostopic/rostopic-echo.png)
+![rostopic-echo.png](rostopic-echo.png)
 
 ---

@@ -18,7 +18,7 @@ To start ROS Master you just have to enter the following command in the terminal
 roscore
 ```
 
-![ros-master.png](./ROS_Basics_with_Turtlesim/ROS_Master/ros-master.png)
+![ros-master.png](ros-master.png)
 
 `roscore` is a collection of nodes and programs that are pre-requisites of a ROS-based system. You must have a roscore running in order for ROS nodes to communicate.
 

@@ -24,7 +24,7 @@
 </launch>
 ```
 
-<center><a href="ROS_Basics_with_Turtlesim/ROS_Launch_Files/turtlesim.launch" download><button>Download</button></a></center>
+<center><a href="turtlesim.launch" download><button>Download</button></a></center>
 
 ## Run Command
 
@@ -34,9 +34,10 @@ roslaunch pkg_ros_basics turtlesim.launch
 
 ## Output
 
-![turtlesim.png](./ROS_Basics_with_Turtlesim/ROS_Launch_Files/turtlesim.png)
+![turtlesim.png](turtlesim.png)
 
 <br />
 - The code is self-explanatory.
 - If you are not able to understand the code feel free to seek help from us.
+
 ---

@@ -169,6 +169,6 @@ if __name__ == '__main__':
 
 ```
 
-<center><a href="tasks/task0/autoeval.py" download><button>Download</button></a><center>
+<center><a href="autoeval.py" download><button>Download</button></a><center>
 
 ---
