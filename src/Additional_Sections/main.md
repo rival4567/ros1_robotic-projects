@@ -1,6 +1,5 @@
 # Additional Sections
 
-- Using [ROS2 Tutorials](https://docs.ros.org/en/foxy/Tutorials.html) to create ROS1 Tutorials :D
-- add two mini-projects,
-    - `catch me turtle`
-    - `ros-actions`
+- This section will make user get used to terminal and also ros basic commands.
+- It will also help them later if they've to do debugging.
+- It is practice purpose only.

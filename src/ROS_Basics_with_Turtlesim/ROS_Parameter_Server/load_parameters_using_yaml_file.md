@@ -33,7 +33,7 @@ In this section we will learn how to load your own parameters in ROS Parameter S
 
 1. Now fill your config file.
    ```yaml
-   # Comment: my_config.yaml Configuration
+   # Comment: config_my.yaml Configuration
    details:
        name:
            first: "Heisenberg" # First Name
@@ -42,6 +42,8 @@ In this section we will learn how to load your own parameters in ROS Parameter S
             address: "ABQ Street, ABQ" # Address
             phone: 77777    # Contact
    ```
+   <center><a href="./ROS_Basics_with_Turtlesim/ROS_Parameter_Server/config_my.yaml" download><button>Download</button></a></center>
+   
    - ROS Build system will create a Python Dictionary called `details`.
 
    - This dictionary will have two keys,
