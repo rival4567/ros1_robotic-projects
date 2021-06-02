@@ -10,6 +10,7 @@
 
 ![rqt_graph-output.png](rqt_graph-output.png)
 
+
 - Your terminal should look like this at the startup of roslaunch server.
 
 ```bash
