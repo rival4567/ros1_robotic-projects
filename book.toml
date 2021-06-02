@@ -8,7 +8,7 @@ title = "ROS-Noetic-Tutorials"
 [output.html]
 theme = "my-theme"
 default-theme = "light"
-preferred-dark-theme = "navy"
+preferred-dark-theme = "ayu"
 curly-quotes = true
 mathjax-support = false
 copy-fonts = true
