@@ -7,7 +7,7 @@
   - The following code can be found in actionlib_tutorials/simple_action_servers/fibonacci_server.py, and implements a python action server for the [fibonacci action](http://docs.ros.org/api/actionlib_tutorials/html/classfibonacci__server_1_1FibonacciAction.html).
 
   ```python
-  #! /usr/bin/env python
+  #! /usr/bin/env python3
    
    import rospy
    
@@ -95,7 +95,7 @@
   The following code can be found in [actionlib_tutorials](http://wiki.ros.org/actionlib_tutorials) repository, and implements a simple python action client for the [fibonacci action](http://docs.ros.org/api/actionlib_tutorials/html/classfibonacci__server_1_1FibonacciAction.html).
 
   ```python
-  #! /usr/bin/env python
+  #! /usr/bin/env python3
    
    import rospy
    from __future__ import print_function
