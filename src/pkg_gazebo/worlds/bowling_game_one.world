@@ -192,7 +192,7 @@
             <pose>0 0 0.1 0 -0 0</pose>
             <geometry>
               <mesh>
-                <uri>/home/ubuntu/workspace/src/pkg_gazebo/models/bowling_alley/meshes/bowling-alley.obj</uri>
+                <uri>model://bowling_alley/meshes/bowling-alley.obj</uri>
                 <scale>1 1 1</scale>
               </mesh>
             </geometry>
@@ -205,16 +205,16 @@
             <pose>0 0 0.1 0 -0 0</pose>
             <geometry>
               <mesh>
-                <uri>/home/ubuntu/workspace/src/pkg_gazebo/models/bowling_alley/meshes/bowling-alley.obj</uri>
+                <uri>model://bowling_alley/meshes/bowling-alley-collision.obj</uri>
                 <scale>1 1 1</scale>
               </mesh>
             </geometry>
             <surface>
               <friction>
                 <ode>
-                  <mu>0.04</mu>
+                  <mu>0.2</mu>
                   <mu2>0.2</mu2>
-                  <fdir1>0 0 0</fdir1>
+                  <fdir1>0.1 0.2 0</fdir1>
                   <slip1>0</slip1>
                   <slip2>0</slip2>
                 </ode>
@@ -304,7 +304,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>/home/ubuntu/workspace/src/pkg_gazebo/models/bowling_pin/meshes/bowling-pin.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -317,15 +317,15 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>/home/ubuntu/workspace/src/pkg_gazebo/models/bowling_pin/meshes/bowling-pin.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
           <surface>
             <friction>
               <ode>
-                <mu>0.2</mu>
-                <mu2>0.2</mu2>
+                <mu>1</mu>
+                <mu2>1</mu2>
                 <fdir1>0 0 0</fdir1>
                 <slip1>0</slip1>
                 <slip2>0</slip2>
@@ -414,7 +414,7 @@
         </model>
       </model>
       <light name='user_spot_light_0'>
-        <pose>0 0 1.5 0 -0 0</pose>
+        <pose>0 -0.5 1.5 0 -0 0</pose>
       </light>
       <light name='user_point_light_1'>
         <pose>0 16.5 1.5 0 -0 0</pose>
@@ -439,7 +439,7 @@
     <light name='user_spot_light_1' type='spot'>
       <pose>0 13 2 0 -0 0</pose>
       <diffuse>0.5 0.5 0.5 1</diffuse>
-      <specular>0.6 0.1 0.1 0.3</specular>
+      <specular>0.8 0.8 0 0.3</specular>
       <direction>0 1 0</direction>
       <attenuation>
         <range>100</range>
@@ -455,9 +455,9 @@
       </spot>
     </light>
     <light name='user_spot_light_0' type='spot'>
-      <pose>0 0 1.5 0 -0 0</pose>
+      <pose>0 -0.5 1.5 0 -0 0</pose>
       <diffuse>0.5 0.5 0.5 1</diffuse>
-      <specular>0 0.1 0 1</specular>
+      <specular>0 0.5 0 0.5</specular>
       <attenuation>
         <range>20</range>
         <constant>0.5</constant>
@@ -468,7 +468,7 @@
       <direction>0 0 -1</direction>
       <spot>
         <inner_angle>0.6</inner_angle>
-        <outer_angle>2</outer_angle>
+        <outer_angle>1.5</outer_angle>
         <falloff>1</falloff>
       </spot>
     </light>
