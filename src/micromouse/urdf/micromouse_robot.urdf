@@ -1,14 +1,26 @@
 <?xml version="1.0"?>
 <robot name="micromouse">
+    <link name="world"/>
     <link name="base_link">
         <visual>
             <geometry>
-                <box size="1.0 1.0 1.0"/>
+                <mesh filename="package://micromouse/models/chassis/micromouse.obj"/>
             </geometry>
         </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://micromouse/models/chassis/micromouse.obj"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="1.0" />
+            <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+        </inertial>
     </link>
-    <inertial>
-        <mass value="1"/>
-        <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
-    </inertial>
+    <joint name="joint_name" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+    
 </robot>
