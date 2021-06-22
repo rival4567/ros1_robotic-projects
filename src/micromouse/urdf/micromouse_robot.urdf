@@ -13,6 +13,9 @@
     <xacro:property name="wheel_pos_y" value="-0.016"/>
     <xacro:property name="castor_pos_y" value="0.025"/>
     
+    <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+    <xacro:include filename="$(find micromouse)/urdf/micromouse_robot.gazebo" />
+
     <xacro:macro name="wheel_link" params="name">
         <link name="${name}_wheel_link">
             <visual>
@@ -24,7 +27,7 @@
             <collision>
                 <origin xyz="0 0 0" rpy="0.0 ${rotation_90} 0.0"/>
                 <geometry>
-                    <mesh filename="package://micromouse/models/wheel/micromouse_wheel.obj" scale="${scale_wheel} ${scale_wheel} ${scale_wheel}"/>
+                    <cylinder radius="0.01" length="0.00425"/>
                 </geometry>
             </collision>
             <inertial>
@@ -45,7 +48,7 @@
         <collision>
             <origin xyz="0.0 0.0 0.0" rpy="${rotation_90} 0.0 0.0"/>
             <geometry>
-                <mesh filename="package://micromouse/models/chassis/micromouse.obj" scale="${scale_chassis} ${scale_chassis} ${scale_chassis}"/>
+                <box size="0.045 0.004 0.075"/>
             </geometry>
         </collision>
         <inertial>
@@ -74,6 +77,7 @@
             </inertial>
         </collision>
     </link>
+
     <joint name="left_wheel" type="continuous">
         <parent link="base_link"/>
         <child link="left_wheel_link"/>
@@ -103,46 +107,16 @@
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
+
     <transmission name="right_wheel_trans">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="right_wheel">
             <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
         </joint>
         <actuator name="right_wheel_motor">
-        <hardwareInterface>EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
+            <hardwareInterface>EffortJointInterface</hardwareInterface>
+            <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
 
-    <!-- SENSORS -->
-
-    <!-- Differential drive controller  -->
-    <gazebo>
-        <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
-            <rosDebugLevel>Debug</rosDebugLevel>
-            <publishWheelTF>True</publishWheelTF>
-            <publishTf>1</publishTf>
-            <publishWheelJointState>true</publishWheelJointState>
-            <alwaysOn>true</alwaysOn>
-            <updateRate>100.0</updateRate>
-            <leftJoint>left_wheel</leftJoint>
-            <rightJoint>right_wheel</rightJoint>
-            <wheelSeparation>${2*wheel_pos_x}</wheelSeparation>
-            <wheelDiameter>${2*radius_castor}</wheelDiameter>
-            <broadcastTF>1</broadcastTF>
-            <wheelTorque>30</wheelTorque>
-            <wheelAcceleration>1.8</wheelAcceleration>
-            <commandTopic>cmd_vel</commandTopic>
-            <odometryFrame>odom</odometryFrame>
-            <odometryTopic>odom</odometryTopic>
-            <robotBaseFrame>base_link</robotBaseFrame>
-        </plugin>
-    </gazebo>
-
-    <!-- Gazebo plugin for ROS Control -->
-    <gazebo>
-        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-            <robotNamespace>/</robotNamespace>
-        </plugin>
-    </gazebo>
 </robot>

@@ -1,5 +1,4 @@
-<?xml version="1.0"?>
-<sdf version='1.7'>
+<sdf version='1.6'>
   <world name='default'>
     <model name='ground_plane'>
       <static>1</static>
@@ -8,7 +7,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>50 50</size>
+              <size>100 100</size>
             </plane>
           </geometry>
           <surface>
@@ -70,7 +69,7 @@
       </camera>
     </gui>
     <plugin name='maze' filename='libmaze_plugin.so'/>
-    <physics type='ode'>
+    <physics name='default_physics' default='0' type='ode'>
       <real_time_update_rate>1000</real_time_update_rate>
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>

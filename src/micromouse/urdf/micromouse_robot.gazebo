@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<robot>
+
+    <!-- Gazebo plugin for ROS Control -->
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
+
+    <!-- Frictional Values -->
+    <gazebo reference="castor">
+        <mu1 value="2.0"/>
+        <mu2 value="1.0"/>
+        <kp value="1e7"/>
+        <kd value="1.0"/>
+        <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo reference="left_wheel_link">
+        <mu1 value="2.0"/>
+        <mu2 value="1.0"/>
+        <kp value="1e7"/>
+        <kd value="1.0"/>
+    </gazebo>
+
+    <gazebo reference="right_wheel_link">
+        <mu1 value="2.0"/>
+        <mu2 value="1.0"/>
+        <kp value="1e7"/>
+        <kd value="1.0"/>
+    </gazebo>
+
+    <!-- Differential drive controller  -->
+    <gazebo>
+        <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
+            <rosDebugLevel>Debug</rosDebugLevel>
+            <publishWheelTF>True</publishWheelTF>
+            <publishTf>1</publishTf>
+            <publishWheelJointState>true</publishWheelJointState>
+            <alwaysOn>true</alwaysOn>
+            <updateRate>50.0</updateRate>
+            <leftJoint>left_wheel</leftJoint>
+            <rightJoint>right_wheel</rightJoint>
+            <wheelSeparation>${2*wheel_pos_x}</wheelSeparation>
+            <wheelDiameter>${2*radius_castor}</wheelDiameter>
+            <broadcastTF>1</broadcastTF>
+            <wheelTorque>30</wheelTorque>
+            <wheelAcceleration>1.8</wheelAcceleration>
+            <commandTopic>/micromouse/cmd_vel</commandTopic>
+            <odometryFrame>odom</odometryFrame>
+            <odometryTopic>odom</odometryTopic>
+            <robotBaseFrame>base_link</robotBaseFrame>
+            <odometrySource>1</odometrySource>
+        </plugin>
+    </gazebo>
+
+    <!-- SENSORS -->
+
+</robot>
