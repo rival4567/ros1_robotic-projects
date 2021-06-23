@@ -6,11 +6,11 @@ micromouse:
   
   # Position Controllers ---------------------------------------
   base_to_left_wheel_joint_position_controller:
-    type: "position_controllers/JointPositionController"
-    joint: left_wheel
+    type: "velocity_controllers/JointVelocityController"
+    joint: joint_left_wheel
     pid: {p: 100.0, i: 0.01, d: 10.0}
 
   base_to_right_wheel_joint_position_controller:
-    type: "position_controllers/JointPositionController"
-    joint: right_wheel
+    type: "velocity_controllers/JointVelocityController"
+    joint: joint_right_wheel
     pid: {p: 100.0, i: 0.01, d: 10.0}

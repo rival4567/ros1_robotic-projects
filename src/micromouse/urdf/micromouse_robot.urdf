@@ -21,7 +21,7 @@
             <visual>
                 <origin xyz="0 0 0" rpy="0.0 ${rotation_90} 0.0"/>
                 <geometry>
-                    <mesh filename="package://micromouse/models/wheel/micromouse_wheel.obj" scale="${scale_wheel} ${scale_wheel} ${scale_wheel}"/>
+                    <cylinder radius="0.01" length="0.00425"/>
                 </geometry>
             </visual>
             <collision>
@@ -37,7 +37,7 @@
         </link>
     </xacro:macro>
 
-    
+    <link name="dummy"/>
     <link name="base_link">
         <visual>
             <origin xyz="0.0 0.0 0.0" rpy="${rotation_90} 0.0 0.0"/>
@@ -97,6 +97,12 @@
         <child link="castor_link"/>
         <origin xyz="0 ${castor_pos_y} -0.006"/>
     </joint>
+
+    <joint name="dummy_joint" type="fixed">
+        <parent link="dummy"/>
+        <child link="base_link"/>
+    </joint>
+    
 
     <!-- Transmission is important to link the joints and the controller -->
     <transmission name="left_wheel_trans">

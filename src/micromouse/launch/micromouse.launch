@@ -6,7 +6,7 @@
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
-  <arg name="model" default="$(find micromouse)/urdf/bot.urdf"/>
+  <arg name="model" default="$(find micromouse)/urdf/micromouse_bot.urdf.xacro"/>
   <arg name="extra_gazebo_args" default="--verbose"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
