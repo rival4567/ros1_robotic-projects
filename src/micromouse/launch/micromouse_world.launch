@@ -6,7 +6,7 @@
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
-  <arg name="model" default="$(find micromouse)/urdf/micromouse_robot.urdf"/>
+  <arg name="model" default="$(find micromouse)/urdf/micromouse_bot.urdf.xacro"/>
   <arg name="extra_gazebo_args" default="--verbose"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -20,13 +20,17 @@
   </include>
 
   <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
-  <rosparam file="$(find micromouse)/config/pos_control.yaml" command="load"/>
+  <rosparam file="$(find micromouse)/config/diff_drive.yaml" command="load" ns="differential_drive_controller"/>
 
-  <node name="controller_spawner" pkg ="controller_manager" type="spawner" ns="/micromouse" args="
-  base_to_left_wheel_joint_position_controller base_to_right_wheel_joint_position_controller joint_state_controller --shutdown-timeout 3"/>
+  <node name="controller_spawner" pkg ="controller_manager" type="spawner" ns="/" args="
+  differential_drive_controller --shutdown-timeout 3"/>
   
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
         args="-x -1.35 -y 1.23 -z 0.05 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
+
+  <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+    <param name="default_topic" value="/differential_drive_controller/cmd_vel"/>
+  </node>
 
 </launch>
