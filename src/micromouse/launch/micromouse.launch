@@ -21,10 +21,9 @@
 
   <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
   <rosparam file="$(find micromouse)/config/velocity_control.yaml" command="load"/>
-  <!-- <rosparam file="$(find micromouse)/config/diff_drive.yaml" command="load"/> -->
 
   <node name="controller_spawner" pkg ="controller_manager" type="spawner" ns="/micromouse" args="
-  base_to_left_wheel_joint_position_controller base_to_right_wheel_joint_position_controller joint_state_controller --shutdown-timeout 3"/>
+  left_wheel_joint_velocity_controller right_wheel_joint_velocity_controller joint_state_controller"/>
   
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
@@ -33,5 +32,5 @@
   <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
     <param name="default_topic" value="/micromouse/cmd_vel"/>
   </node>
-  
+
 </launch>

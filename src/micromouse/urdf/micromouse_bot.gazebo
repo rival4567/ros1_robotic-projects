@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <robot>
     <!-- Gazebo plugin for ROS Control -->
-    <!-- <gazebo>
+    <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
             <robotNamespace>/micromouse</robotNamespace>
         </plugin>
-    </gazebo> -->
+    </gazebo>
 
     <gazebo reference="mouse_head_link">
-        <mu1 value="0.0"/>
-        <mu2 value="0.0"/>
+        <mu1 value="0.2"/>
+        <mu2 value="0.2"/>
         <kp value="1000000.0"/>
         <kd value="100.0"/>
         <slip1 value="1"/>
@@ -20,8 +20,8 @@
     </gazebo>
 
     <gazebo reference="mouse_body_link">
-        <mu1 value="0.0"/>
-        <mu2 value="0.0"/>
+        <mu1 value="10.0"/>
+        <mu2 value="10.0"/>
         <kp value="1000000.0"/>
         <kd value="100.0"/>
         <slip1 value="1"/>
@@ -77,6 +77,12 @@
             <commandTopic>/micromouse/cmd_vel</commandTopic>
             <odometryTopic>odom</odometryTopic>
             <odometryFrame>odom</odometryFrame>
+            <publishWheelTF>true</publishWheelTF>
+            <publishOdomTF>true</publishOdomTF>
+            <publishWheelJointState>true</publishWheelJointState>
+            <odometrySource>world</odometrySource>
+            <publishTf>1</publishTf>
+            <rosDebugLevel>na</rosDebugLevel>
             <robotBaseFrame>mouse_body_link</robotBaseFrame>
         </plugin>
     </gazebo>
