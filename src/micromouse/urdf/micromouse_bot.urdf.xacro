@@ -4,14 +4,14 @@
     <!-- Import all Gazebo-customization elements, including Gazebo colors -->
     <xacro:include filename="$(find micromouse)/urdf/micromouse_bot.gazebo" />
 
-    <material name="body_texture">
+    <material name="green">
         <color rgba="0.2 0.4 0.2 1.0"/>
     </material>
 
     <material name="black">
         <color rgba="0.0 0.0 0.0 1.0"/>
     </material>
-    
+
     <xacro:property name="rotate" value="1.57079632679"/>
     <xacro:property name="head_radius" value="0.025"/>
     <xacro:property name="body_radius" value="0.020"/>
@@ -24,7 +24,6 @@
         </inertial>
     </xacro:macro>
     
-    <link name="base_link"/>
     <link name="mouse_body_link">
         <inertial>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
@@ -36,7 +35,7 @@
             <geometry>
                 <cylinder radius="${body_radius}" length="${body_length}"/>
             </geometry>
-            <material name="body_texture"/>
+            <material name="green"/>
         </visual>
         <collision name="body">
             <origin xyz="0.0 0.0 0.0" rpy="${rotate} 0.0 0.0"/>
@@ -49,29 +48,20 @@
             <geometry>
                 <sphere radius="${body_radius}"/>
             </geometry>
-            <material name="body_texture"/>
+            <material name="green"/>
         </visual>
-        <collision>
+        <collision name="butt">
             <origin xyz="0.0 ${body_length/2} 0.0"/>
             <geometry>
                 <sphere radius="${body_radius}"/>
             </geometry>
         </collision>
-    </link>
-
-    <joint name="dummy_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="mouse_body_link"/>
-    </joint>
-
-    <link name="mouse_head_link">
-        <xacro:default_inertial/>
         <visual>
             <origin xyz="0.0 -${body_length/2} 0.0" rpy="0.0 0.0 0.0"/>
             <geometry>
                 <sphere radius="${head_radius}"/>
             </geometry>
-            <material name="body_texture"/>
+            <material name="green"/>
         </visual>
         <collision>
             <origin xyz="0.0 -${body_length/2} 0.0" rpy="0.0 0.0 0.0"/>
@@ -79,18 +69,7 @@
                 <sphere radius="${head_radius}"/>
             </geometry>
         </collision>
-    </link>
-
-    <joint name="mouse_head_joint" type="fixed">
-        <parent link="mouse_body_link"/>
-        <child link="mouse_head_link"/>
-        <!-- <axis xyz="0 0 1"/> -->
-        <!-- <limit lower="-${rotate/8}" upper="${rotate/8}" velocity="5.0" effort="10.0"/> -->
-    </joint>
-
-
-    <link name="mouse_left_eye_link">
-        <visual>
+        <visual name="left_eye">
             <origin xyz="-0.01 -${body_length/2+head_radius-0.005} 0.01"/>
             <geometry>
                 <sphere radius="0.004"/>
@@ -103,16 +82,7 @@
                 <sphere radius="0.004"/>
             </geometry>
         </collision>
-        <xacro:default_inertial/>
-    </link>
-
-    <joint name="left_eye_joint" type="fixed">
-        <parent link="mouse_head_link"/>
-        <child link="mouse_left_eye_link"/>
-    </joint>
-
-    <link name="mouse_right_eye_link">
-        <visual>
+        <visual name="right_eye">
             <origin xyz="0.01 -${body_length/2+head_radius-0.005} 0.01"/>
             <geometry>
                 <sphere radius="0.004"/>
@@ -125,35 +95,20 @@
                 <sphere radius="0.004"/>
             </geometry>
         </collision>
-        <xacro:default_inertial/>
-    </link>
-
-    <joint name="right_eye_joint" type="fixed">
-        <parent link="mouse_head_link"/>
-        <child link="mouse_right_eye_link"/>
-    </joint>
-
-    <link name="mouse_nose_link">
-        <visual>
+        <visual name="nose">
+            <origin xyz="0.0 -${body_length/2+head_radius-0.005} -0.01" rpy="${2*rotate} 0.0 0"/>
             <geometry>
                 <cylinder radius="0.006" length="0.0055"/>
             </geometry>
             <material name="black"/>
         </visual>
         <collision>
+            <origin xyz="0.0 -${body_length/2+head_radius-0.005} -0.01" rpy="${2*rotate} 0.0 0"/>
             <geometry>
                 <cylinder radius="0.006" length="0.0055"/>
             </geometry>
         </collision>
-        <xacro:default_inertial/>
     </link>
-
-    <joint name="mouse_nose_joint" type="fixed">
-        <parent link="mouse_head_link"/>
-        <child link="mouse_nose_link"/>
-        <origin xyz="0.0 -${body_length/2+head_radius-0.005} -0.01" rpy="${2*rotate} 0.0 0"/>
-    </joint>
-    
 
     <link name="right_wheel_link">
         <inertial>

@@ -10,7 +10,7 @@
   <arg name="extra_gazebo_args" default="--verbose"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find micromouse)/worlds/micromouse_world/micromouse_empty.world"/>
+    <arg name="world_name" value="$(find micromouse)/worlds/micromouse_world/micromouse_simple.world"/>
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)"/>

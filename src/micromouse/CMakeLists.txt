@@ -136,14 +136,6 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-## Declare a C++ library
-add_library(maze_plugin
-  src/maze_plugin.cpp
-)
-add_library(mouse_plugin
-  src/mouse_plugin.cpp
-)
-
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -165,12 +157,6 @@ add_library(mouse_plugin
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(maze_plugin
-  ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES}
-)
-target_link_libraries(mouse_plugin
-  ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES}
-)
 
 #############
 ## Install ##
@@ -195,8 +181,6 @@ target_link_libraries(mouse_plugin
 ## Mark libraries for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_libraries.html
 install(TARGETS
-  maze_plugin
-  mouse_plugin
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
