@@ -1,4 +1,4 @@
 devel/
 build/
 src/mdbook_ros-noetic
-src/gzmaze
+src/gzmaze/
