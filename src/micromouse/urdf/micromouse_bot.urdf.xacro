@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <robot name="micromouse" xmlns:xacro="https://www.ros.org/wiki/xacro">
 
+    <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+    <xacro:include filename="$(find micromouse)/urdf/micromouse_bot.gazebo" />
+
     <material name="body_texture">
         <color rgba="0.2 0.4 0.2 1.0"/>
     </material>
@@ -9,10 +12,10 @@
         <color rgba="0.0 0.0 0.0 1.0"/>
     </material>
     
-    <xacro:property name="rotate_90" value="1.57079632679"/>
+    <xacro:property name="rotate" value="1.57079632679"/>
     <xacro:property name="head_radius" value="0.025"/>
     <xacro:property name="body_radius" value="0.020"/>
-    <xacro:property name="body_length" value="0.07"/>
+    <xacro:property name="body_length" value="0.05"/>
 
     <xacro:macro name="default_inertial">
         <inertial>
@@ -28,30 +31,31 @@
             <mass value="0.5"/>
             <inertia ixx="0.00022083" ixy="0.0" ixz="0.0" iyy="0.00022083" iyz="0.0" izz="0.00040833"/>
         </inertial>
-        <visual name="body">
-            <origin xyz="0.0 0.0 0.0" rpy="${rotate_90} 0.0 0.0"/>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="${rotate} 0.0 0.0"/>
             <geometry>
                 <cylinder radius="${body_radius}" length="${body_length}"/>
             </geometry>
             <material name="body_texture"/>
         </visual>
         <collision name="body">
-            <origin xyz="0.0 0.0 0.0" rpy="${rotate_90} 0.0 0.0"/>
+            <origin xyz="0.0 0.0 0.0" rpy="${rotate} 0.0 0.0"/>
             <geometry>
                 <cylinder radius="${body_radius}" length="${body_length}"/>
             </geometry>
         </collision>
-        <visual name="left_base">
+        <visual>
+            <origin xyz="0.0 ${body_length/2} 0.0"/>
             <geometry>
-                <box size="0.005 0.06 0.02"/>
+                <sphere radius="${body_radius}"/>
             </geometry>
             <material name="body_texture"/>
         </visual>
-        <collision name="left_base">
+        <collision>
+            <origin xyz="0.0 ${body_length/2} 0.0"/>
             <geometry>
-                <box size="0.005 0.06 0.02"/>
+                <sphere radius="${body_radius}"/>
             </geometry>
-            <material name="body_texture"/>
         </collision>
     </link>
 
@@ -61,47 +65,42 @@
     </joint>
 
     <link name="mouse_head_link">
-        <inertial>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            <mass value="0.2"/>
-            <inertia ixx="0.00015" ixy="0.0" ixz="0.0" iyy="0.00015" iyz="0.0" izz="0.00015"/>
-        </inertial>
-        <visual name="head">
-            <origin xyz="0.0 ${body_length/2} 0.0" rpy="0.0 0.0 0.0"/>
+        <xacro:default_inertial/>
+        <visual>
+            <origin xyz="0.0 -${body_length/2} 0.0" rpy="0.0 0.0 0.0"/>
             <geometry>
                 <sphere radius="${head_radius}"/>
             </geometry>
             <material name="body_texture"/>
         </visual>
-        <collision name="head">
-            <origin xyz="0.0 ${body_length/2} 0.0" rpy="0.0 0.0 0.0"/>
+        <collision>
+            <origin xyz="0.0 -${body_length/2} 0.0" rpy="0.0 0.0 0.0"/>
             <geometry>
                 <sphere radius="${head_radius}"/>
             </geometry>
         </collision>
     </link>
 
-    <joint name="mouse_head_joint" type="revolute">
+    <joint name="mouse_head_joint" type="fixed">
         <parent link="mouse_body_link"/>
         <child link="mouse_head_link"/>
-        <axis xyz="0 0 1"/>
-        <limit lower="-${rotate_90/8}" upper="${rotate_90/8}" velocity="5.0" effort="10.0"/>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <!-- <axis xyz="0 0 1"/> -->
+        <!-- <limit lower="-${rotate/8}" upper="${rotate/8}" velocity="5.0" effort="10.0"/> -->
     </joint>
 
 
     <link name="mouse_left_eye_link">
         <visual>
-            <origin xyz="-0.01 0.05 0.01"/>
+            <origin xyz="-0.01 -${body_length/2+head_radius-0.005} 0.01"/>
             <geometry>
-                <sphere radius="0.001"/>
+                <sphere radius="0.004"/>
             </geometry>
             <material name="black"/>
         </visual>
         <collision>
-            <origin xyz="-0.01 0.05 0.01"/>
+            <origin xyz="-0.01 -${body_length/2+head_radius-0.005} 0.01"/>
             <geometry>
-                <sphere radius="0.001"/>
+                <sphere radius="0.004"/>
             </geometry>
         </collision>
         <xacro:default_inertial/>
@@ -114,16 +113,16 @@
 
     <link name="mouse_right_eye_link">
         <visual>
-            <origin xyz="0.01 0.05 0.01"/>
+            <origin xyz="0.01 -${body_length/2+head_radius-0.005} 0.01"/>
             <geometry>
-                <sphere radius="0.001"/>
+                <sphere radius="0.004"/>
             </geometry>
             <material name="black"/>
         </visual>
         <collision>
-            <origin xyz="0.01 0.05 0.01"/>
+            <origin xyz="0.01 -${body_length/2+head_radius-0.005} 0.01"/>
             <geometry>
-                <sphere radius="0.001"/>
+                <sphere radius="0.004"/>
             </geometry>
         </collision>
         <xacro:default_inertial/>
@@ -133,6 +132,109 @@
         <parent link="mouse_head_link"/>
         <child link="mouse_right_eye_link"/>
     </joint>
+
+    <link name="mouse_nose_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.006" length="0.0055"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.006" length="0.0055"/>
+            </geometry>
+        </collision>
+        <xacro:default_inertial/>
+    </link>
+
+    <joint name="mouse_nose_joint" type="fixed">
+        <parent link="mouse_head_link"/>
+        <child link="mouse_nose_link"/>
+        <origin xyz="0.0 -${body_length/2+head_radius-0.005} -0.01" rpy="${2*rotate} 0.0 0"/>
+    </joint>
     
-    
+
+    <link name="right_wheel_link">
+        <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 ${rotate} 0.0"/>
+            <mass value="0.2"/>
+            <inertia ixx="2.3e-06" ixy="0.0" ixz="0.0" iyy="2.3e-06" iyz="0.0" izz="4.5e-06"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 ${rotate} 0.0"/>
+            <geometry>
+                <cylinder radius="0.02" length="0.01"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 ${rotate} 0.0"/>
+            <geometry>
+                <cylinder radius="0.02" length="0.01"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="right_wheel_joint" type="continuous">
+        <parent link="mouse_body_link"/>
+        <child link="right_wheel_link"/>
+        <axis xyz="1 0 0"/>
+        <origin xyz="-0.025  0.02 -0.005" rpy="0 0 0"/>
+        <limit effort="-1" velocity="100"/>
+        <joint_properties damping="0.01" friction="0.0" />
+    </joint>
+
+    <transmission name="right_wheel_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="right_wheel_joint">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="right_wheel_motor">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>7</mechanicalReduction>
+        </actuator>
+    </transmission>
+
+    <link name="left_wheel_link">
+        <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 ${rotate} 0.0"/>
+            <mass value="0.2"/>
+            <inertia ixx="2.3e-06" ixy="0.0" ixz="0.0" iyy="2.3e-06" iyz="0.0" izz="4.5e-06"/>
+        </inertial>
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 ${rotate} 0.0"/>
+            <geometry>
+                <cylinder radius="0.02" length="0.01"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 ${rotate} 0.0"/>
+            <geometry>
+                <cylinder radius="0.02" length="0.01"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="left_wheel_joint" type="continuous">
+        <parent link="mouse_body_link"/>
+        <child link="left_wheel_link"/>
+        <axis xyz="1 0 0"/>
+        <origin xyz="0.025  0.02 -0.005" rpy="0 0 0"/>
+        <limit effort="-1" velocity="100"/>
+        <joint_properties damping="0.01" friction="0.0" />
+    </joint>
+
+    <transmission name="left_wheel_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="left_wheel_joint">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="left_wheel_motor">
+            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <mechanicalReduction>7</mechanicalReduction>
+        </actuator>
+    </transmission>
+
 </robot>
