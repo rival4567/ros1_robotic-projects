@@ -10,10 +10,10 @@ def servo_cmd(servo_val, flag):
     pub2 = rospy.Publisher(
         '/micromouse/right_wheel_joint_velocity_controller/command', Float64, queue_size=40)
     rospy.init_node('servo_cmd', anonymous=True)
-    rate = rospy.Rate(50)  # 40hz
+    rate = rospy.Rate(50)  # 50hz
     while not rospy.is_shutdown():
-        pub.publish(0.2)
-        pub2.publish(0.2)
+        pub.publish(5.0)
+        pub2.publish(5.0)
         rate.sleep()
 
 

@@ -1,5 +1,8 @@
 #! /usr/bin/env python3
 
+# Load `go_to_pose.yaml` first before running this node. To make the bot move
+# to desired position `rosservice call /go_to_point_switch "data: true" `
+
 # import ros stuff
 import rospy
 from sensor_msgs.msg import LaserScan
@@ -24,8 +27,7 @@ desired_position_.y = rospy.get_param('des_pos_y')
 desired_position_.z = 0
 # parameters
 yaw_precision_ = math.pi / 90  # +/- 2 degree allowed
-dist_precision_ = 0.3
-
+dist_precision_ = 0.01
 # publishers
 pub = None
 
@@ -57,13 +59,14 @@ def clbk_odom(msg):
         msg.pose.pose.orientation.z,
         msg.pose.pose.orientation.w)
     euler = transformations.euler_from_quaternion(quaternion)
-    yaw_ = euler[2]
+    # fixing joint pos by subtracting 90 degrees because they're different in gazebo and ROS
+    yaw_ = euler[2]-math.pi/2
 
 
 def change_state(state):
     global state_
     state_ = state
-    print 'State changed to [%s]' % state_
+    print('State changed to [%s]' % state_)
 
 
 def normalize_angle(angle):
@@ -81,13 +84,13 @@ def fix_yaw(des_pos):
 
     twist_msg = Twist()
     if math.fabs(err_yaw) > yaw_precision_:
-        twist_msg.angular.z = 0.7 if err_yaw > 0 else -0.7
+        twist_msg.angular.z = 0.3 if err_yaw > 0 else -0.3
 
     pub.publish(twist_msg)
 
     # state change conditions
     if math.fabs(err_yaw) <= yaw_precision_:
-        print 'Yaw error: [%s]' % err_yaw
+        print('Yaw error: [%s]' % err_yaw)
         change_state(1)
 
 
@@ -100,16 +103,15 @@ def go_straight_ahead(des_pos):
 
     if err_pos > dist_precision_:
         twist_msg = Twist()
-        twist_msg.linear.x = 0.6
-        twist_msg.angular.z = 0.2 if err_yaw > 0 else -0.2
+        twist_msg.linear.x = 1.0
         pub.publish(twist_msg)
     else:
-        print 'Position error: [%s]' % err_pos
+        print('Position error: [%s]' % err_pos)
         change_state(2)
 
     # state change conditions
     if math.fabs(err_yaw) > yaw_precision_:
-        print 'Yaw error: [%s]' % err_yaw
+        print('Yaw error: [%s]' % err_yaw)
         change_state(0)
 
 

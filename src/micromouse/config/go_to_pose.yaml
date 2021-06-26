@@ -1,0 +1,4 @@
+# Provide destination for `node_go_to_point.py`
+# After loading these run the node and the service `rosservice call /go_to_point_switch "data: true" `
+des_pos_x: 0.0
+des_pos_y: 0.0

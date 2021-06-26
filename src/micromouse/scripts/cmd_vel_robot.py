@@ -6,6 +6,8 @@ from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from tf import transformations
 
+import math
+
 x_dist = 0
 y_dist = 0
 
@@ -29,7 +31,8 @@ def clbk_odom(msg):
         msg.pose.pose.orientation.w)
     euler = transformations.euler_from_quaternion(quaternion)
 
-    yaw_ = euler[2]
+    # fixing joint pos by subtracting 90 degrees because they're different in gazebo and ROS
+    yaw_ = euler[2]-math.pi/2
     print(x_dist, y_dist)
 
 
@@ -38,8 +41,8 @@ def clbk_laser(msg):
         'p': msg.ranges[:],
     }
     # region['p'][0] represents the 0 degree and 0the value start from back and continues in anti-clockwise direction
-    for i in range(360):
-        print region['p'][i]
+    for i in range(3):
+        print(region['p'][i])
 
 
 def main():
@@ -53,7 +56,7 @@ def main():
         msg1 = Twist()
     # positive speed_z value represents clockwise angular velocity of the bot and positive speed_x value represents forward linear velocity of the robot
         speed_z = 0
-        speed_x = 0.1
+        speed_x = 0.5
         msg1.linear.x = speed_x
         msg1.angular.z = speed_z
         pub.publish(msg1)

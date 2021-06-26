@@ -29,10 +29,8 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
         args="-x -1.35 -y 1.35 -z 0.03 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
 
-  <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
-    <param name="default_topic" value="/micromouse/cmd_vel"/>
-  </node>
-
   <include file="$(find micromouse)/launch/rviz.launch" />
+
+  <node name="node_follow_wall" pkg="micromouse" type="node_follow_wall.py"/>
 
 </launch>

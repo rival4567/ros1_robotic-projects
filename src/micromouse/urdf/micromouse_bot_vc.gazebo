@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <robot>
     <!-- Gazebo plugin for ROS Control -->
-    <!-- <gazebo>
+    <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
             <robotNamespace>/micromouse</robotNamespace>
         </plugin>
-    </gazebo> -->
+    </gazebo>
 
     <gazebo reference="mouse_body_link">
         <mu1 value="0.3"/>

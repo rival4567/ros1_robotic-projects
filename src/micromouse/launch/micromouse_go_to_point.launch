@@ -9,8 +9,9 @@
   <arg name="model" default="$(find micromouse)/urdf/micromouse_bot.urdf.xacro"/>
   <arg name="extra_gazebo_args" default="--verbose"/>
 
+  <rosparam file="$(find micromouse)/config/go_to_pose.yaml" command="load"/>
+
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find micromouse)/worlds/micromouse_world/micromouse_full2.world"/>
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)"/>
@@ -27,8 +28,10 @@
   
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
-        args="-x -1.35 -y 1.35 -z 0.03 -Y 1.5707 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
+        args="-x -1.35 -y 1.35 -z 0.03 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
 
   <include file="$(find micromouse)/launch/rviz.launch" />
-  
+
+  <node name="node_go_to_point" pkg="micromouse" type="node_go_to_point.py"/>
+
 </launch>
