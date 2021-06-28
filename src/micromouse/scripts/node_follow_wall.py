@@ -39,8 +39,8 @@ def clbk_laser(msg):
     regions_ = {
         # mapping from 0 to 2
         'right':  msg.ranges[2]*10,
-        'front':  msg.ranges[2]*10,
-        'left':   msg.ranges[2]*10,
+        'front':  msg.ranges[1]*10,
+        'left':   msg.ranges[0]*10,
     }
 
     take_action()

@@ -12,8 +12,6 @@
         <mu2 value="0.3"/>
         <kp value="1000000.0"/>
         <kd value="100.0"/>
-        <slip1 value="1"/>
-        <slip2 value="1"/>
         <maxVel value="10"/>
         <material>Gazebo/Orange</material>
         <turnGravityOff>false</turnGravityOff>

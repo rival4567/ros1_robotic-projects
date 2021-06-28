@@ -154,7 +154,7 @@
                 <soft_erp>0.2</soft_erp>
                 <kp>1e+13</kp>
                 <kd>1</kd>
-                <max_vel>100.00</max_vel>
+                <max_vel>100</max_vel>
                 <min_depth>0</min_depth>
               </ode>
               <bullet>
@@ -214,12 +214,12 @@
                 <ode>
                   <mu>100</mu>
                   <mu2>100</mu2>
-                  <fdir1>0.1 0.2 0</fdir1>
+                  <fdir1>0 0 0</fdir1>
                   <slip1>0</slip1>
                   <slip2>0</slip2>
                 </ode>
                 <torsional>
-                  <coefficient>0.2</coefficient>
+                  <coefficient>1</coefficient>
                   <patch_radius>0</patch_radius>
                   <surface_radius>0</surface_radius>
                   <use_patch_radius>1</use_patch_radius>
@@ -241,7 +241,7 @@
                   <soft_erp>0.2</soft_erp>
                   <kp>1e+13</kp>
                   <kd>1</kd>
-                  <max_vel>100.00</max_vel>
+                  <max_vel>100</max_vel>
                   <min_depth>0</min_depth>
                 </ode>
                 <bullet>
@@ -282,104 +282,108 @@
       <pose>0 3.56533 0.140017 0 -0 0</pose>
     </model>
     <state world_name='default'>
+      <sim_time>0 0</sim_time>
+      <real_time>0 0</real_time>
+      <wall_time>1624698955 458913296</wall_time>
+      <iterations>0</iterations>
       <model name='bowling_pin'>
-        <pose>0 16 0.45811 1.57068 0 0</pose>
+        <pose>-0.018954 15.9791 0.458 -2.1e-05 -1.7e-05 -0.012798</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>0 16 0.45811 1.57068 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose>-0.018954 15.9791 0.458 1.57068 -1.7e-05 -0.012798</pose>
+          <velocity>-0.001787 0.001268 0.000447 -0.006171 -0.008649 0.00037</velocity>
+          <acceleration>0.722467 -0.370154 -1.49589 3.12328 0.514872 2.00073</acceleration>
+          <wrench>1.15595 -0.592247 -2.39343 0 -0 0</wrench>
         </link>
       </model>
       <model name='bowling_pin_clone'>
-        <pose>-0.25 16.25 0.458044 1.57068 0 0</pose>
+        <pose>-0.267847 16.1777 0.457979 -1.5e-05 1.4e-05 -0.016315</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>-0.25 16.2 0.458044 1.57068 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose>-0.267847 16.1777 0.457979 1.57069 1.4e-05 -0.016315</pose>
+          <velocity>-0.001728 -0.000157 0.00132 0.005128 -0.01745 -0.036594</velocity>
+          <acceleration>-2.58218 1.46767 4.85088 -2.49792 -1.15413 -0.622714</acceleration>
+          <wrench>-4.1315 2.34827 7.76142 0 -0 0</wrench>
         </link>
       </model>
       <model name='bowling_pin_clone_0'>
-        <pose>0.25 16.25 0.458106 -2.7e-05 1.57068 0 0</pose>
+        <pose>0.231293 16.2284 0.457974 -3.3e-05 1.4e-05 -0.015072</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>0.25 16.25 0.458106 1.57068 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose>0.231293 16.2284 0.457974 1.57067 1.4e-05 -0.015072</pose>
+          <velocity>0.001696 -0.001456 0.001885 0.00733 0.008097 -0.000945</velocity>
+          <acceleration>-0.995341 -1.18738 3.97053 0.66792 -0.071541 1.55369</acceleration>
+          <wrench>-1.59255 -1.8998 6.35284 0 -0 0</wrench>
         </link>
       </model>
       <model name='bowling_pin_clone_1'>
-        <pose>-0.45 16.5 0.458039 1.57068 0 0</pose>
+        <pose>-0.467818 16.4768 0.457947 -2.4e-05 -3e-06 -0.014537</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>-0.45 16.5 0.458039 1.57068 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose>-0.467818 16.4768 0.457947 1.57068 -3e-06 -0.014537</pose>
+          <velocity>-0.001604 0.001419 0.000648 -0.0068 -0.00801 -0.000841</velocity>
+          <acceleration>-1.72769 0.196977 1.27097 -0.424612 -1.37333 -1.93324</acceleration>
+          <wrench>-2.7643 0.315163 2.03355 0 -0 0</wrench>
         </link>
       </model>
       <model name='bowling_pin_clone_2'>
-        <pose>0 16.5 0.458045 1.57068 0 0</pose>
+        <pose>-0.018008 16.4792 0.457947 0 1e-06 -0.014194</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>0 16.5 0.458045 1.57068 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose>-0.018008 16.4792 0.457947 1.5707 1e-06 -0.014194</pose>
+          <velocity>0.001894 -0.001733 -6.6e-05 0.008331 0.009223 -0.000967</velocity>
+          <acceleration>0.563577 -0.36885 0.193518 1.66059 0.436207 -0.123881</acceleration>
+          <wrench>0.901724 -0.590159 0.30963 0 -0 0</wrench>
         </link>
       </model>
       <model name='bowling_pin_clone_3'>
-        <pose>0.45 16.5 0.458061 1.57068 0 0</pose>
+        <pose>0.431412 16.4764 0.457939 -8e-06 4e-06 -0.017197</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>0.45 16.5 0.458061 1.57068 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose>0.431412 16.4764 0.457939 1.57069 4e-06 -0.017197</pose>
+          <velocity>0.000953 -0.0023 -0.009238 0.011219 0.004628 0.000254</velocity>
+          <acceleration>0 0 -9.8 2e-06 -5e-06 -0</acceleration>
+          <wrench>0 0 -15.68 0 -0 0</wrench>
         </link>
       </model>
       <model name='bowling_pin_clone_4'>
-        <pose>-0.7 16.75 0.45798 1.57068 0 0</pose>
+        <pose>-0.714114 16.7831 0.457916 -4.2e-05 -1.4e-05 -0.01397</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>-0.7 16.8 0.45798 1.57068 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>-0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose>-0.714114 16.7831 0.457916 1.57066 -1.4e-05 -0.01397</pose>
+          <velocity>0.002816 -0.002953 0.000119 0.014521 0.013563 0.000971</velocity>
+          <acceleration>0.403808 -1.7741 1.16505 -1.49985 0.98722 2.42423</acceleration>
+          <wrench>0.646093 -2.83856 1.86407 0 -0 0</wrench>
         </link>
       </model>
       <model name='bowling_pin_clone_5'>
-        <pose>-0.25 16.75 0.457973 1.57068 0 0</pose>
+        <pose>-0.268352 16.7277 0.457911 3e-06 1e-06 -0.014634</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>-0.25 16.75 0.457973 1.57068 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose>-0.268352 16.7277 0.457911 1.5707 1e-06 -0.014634</pose>
+          <velocity>0.001005 -0.002271 -0.009597 0.01107 0.004909 -0.000174</velocity>
+          <acceleration>0 0 -9.8 -1e-06 3e-06 0</acceleration>
+          <wrench>0 0 -15.68 0 -0 0</wrench>
         </link>
       </model>
       <model name='bowling_pin_clone_6'>
-        <pose>0.25 16.75 0.457973 1.57068 0 0</pose>
+        <pose>0.230294 16.7279 0.457922 -2.1e-05 -2.8e-05 -0.013357</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>0.25 16.75 0.457973 1.57068 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose>0.230294 16.7279 0.457922 1.57068 -2.8e-05 -0.013357</pose>
+          <velocity>4.4e-05 -0.000965 0.000549 0.004696 0.000207 -6.7e-05</velocity>
+          <acceleration>0.325319 -0.495311 1.10206 2.66791 0.224762 -2.87825</acceleration>
+          <wrench>0.52051 -0.792497 1.7633 0 -0 0</wrench>
         </link>
       </model>
       <model name='bowling_pin_clone_7'>
-        <pose>0.7 16.75 0.458003 1.57068 0 0</pose>
+        <pose>0.703728 16.7193 0.457921 -6e-06 3e-06 0.054711</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>0.7 16.75 0.458003 1.57068 0 0</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose>0.703728 16.7193 0.457921 1.57069 3e-06 0.054711</pose>
+          <velocity>0.002725 0.00019 -0.001088 -0.005186 0.011192 -0.020759</velocity>
+          <acceleration>1.6421 1.02037 -1.42683 -2.83995 0.961342 1.64923</acceleration>
+          <wrench>2.62736 1.63259 -2.28292 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
@@ -393,22 +397,22 @@
         </link>
       </model>
       <model name='platform'>
-        <pose>-4.3e-05 3.56533 0.140005 1e-06 -0 -3e-06</pose>
+        <pose>-0 3.56533 0.140017 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link_0'>
-          <pose>0.00217 8.03132 0.124992 1e-06 -0 -3e-06</pose>
-          <velocity>0 0 0 0 0 0</velocity>
-          <acceleration>0 0 0 0 0 0</acceleration>
-          <wrench>0 0 0 0 0 0</wrench>
+          <pose>0.0022 8.03132 0.125 0 -0 0</pose>
+          <velocity>-0 -0 0 0 -0 0</velocity>
+          <acceleration>-0 0 -0 0 -0 0</acceleration>
+          <wrench>-0 0 -0 0 -0 0</wrench>
         </link>
         <model name='bowling_alley'>
           <pose>-0.002255 -0.900657 0.254914 1.57069 -0 -3e-06</pose>
           <scale>1 1 1</scale>
           <link name='link_0'>
             <pose>-0.002255 -0.900657 0.254914 1.57069 -0 -3e-06</pose>
-            <velocity>0 0 0 0 0 0</velocity>
-            <acceleration>0 0 0 0 0 0</acceleration>
-            <wrench>0 0 0 0 0 0</wrench>
+            <velocity>0 0 0 0 -0 0</velocity>
+            <acceleration>0 0 0 0 -0 0</acceleration>
+            <wrench>0 0 0 0 -0 0</wrench>
           </link>
         </model>
       </model>
@@ -478,51 +482,50 @@
     </light>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>0.266143 -5.753864 2.381943 0 0.138 1.508011</pose>
+        <pose>0.002262 -3.72819 1.06753 0 -0.018 1.45201</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
     </gui>
     <model name='bowling_pin'>
       <link name='link_0'>
-        <sensor name="depth_camera" type="depth">
-            <pose>0 0 0 -1.5707 -1.5707 0</pose>
-            <update_rate>20</update_rate>
-            <camera>
-                <horizontal_fov>1.047198</horizontal_fov>
-                <image>
-                    <width>640</width>
-                    <height>480</height>
-                    <format>R8G8B8</format>
-                </image>
-                <clip>
-                    <near>0.05</near>
-                    <far>20</far>
-                </clip>
-            </camera>
-          <plugin name="depth_camera_controller" filename="libgazebo_ros_openni_kinect.so">
-              <baseline>0.2</baseline>
-              <alwaysOn>true</alwaysOn>
-              <updateRate>1.0</updateRate>
-              <cameraName>depth_camera_ir</cameraName>
-              <imageTopicName>/depth_camera/color/image_raw</imageTopicName>
-              <cameraInfoTopicName>/depth_camera/color/camera_info</cameraInfoTopicName>
-              <depthImageTopicName>/depth_camera/depth/image_raw</depthImageTopicName>
-              <depthImageInfoTopicName>/depth_camera/depth/camera_info</depthImageInfoTopicName>
-              <pointCloudTopicName>/depth_camera/depth/points</pointCloudTopicName>
-              <frameName>link_0</frameName>
-              <pointCloudCutoff>0.5</pointCloudCutoff>
-              <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
-              <distortionK1>0.00000001</distortionK1>
-              <distortionK2>0.00000001</distortionK2>
-              <distortionK3>0.00000001</distortionK3>
-              <distortionT1>0.00000001</distortionT1>
-              <distortionT2>0.00000001</distortionT2>
-              <CxPrime>0</CxPrime>
-              <Cx>0</Cx>
-              <Cy>0</Cy>
-              <focalLength>0</focalLength>
-              <hackBaseline>0</hackBaseline>
+        <sensor name='depth_camera' type='depth'>
+          <update_rate>20</update_rate>
+          <camera>
+            <horizontal_fov>1.0472</horizontal_fov>
+            <image>
+              <width>640</width>
+              <height>480</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.05</near>
+              <far>3</far>
+            </clip>
+          </camera>
+          <plugin name='depth_camera_controller' filename='libgazebo_ros_openni_kinect.so'>
+            <baseline>0.2</baseline>
+            <alwaysOn>1</alwaysOn>
+            <updateRate>1.0</updateRate>
+            <cameraName>depth_camera_ir</cameraName>
+            <imageTopicName>/depth_camera/color/image_raw</imageTopicName>
+            <cameraInfoTopicName>/depth_camera/color/camera_info</cameraInfoTopicName>
+            <depthImageTopicName>/depth_camera/depth/image_raw</depthImageTopicName>
+            <depthImageInfoTopicName>/depth_camera/depth/camera_info</depthImageInfoTopicName>
+            <pointCloudTopicName>/depth_camera/depth/points</pointCloudTopicName>
+            <frameName>link_0</frameName>
+            <pointCloudCutoff>0.5</pointCloudCutoff>
+            <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
+            <distortionK1>0.00000001</distortionK1>
+            <distortionK2>0.00000001</distortionK2>
+            <distortionK3>0.00000001</distortionK3>
+            <distortionT1>0.00000001</distortionT1>
+            <distortionT2>0.00000001</distortionT2>
+            <CxPrime>0</CxPrime>
+            <Cx>0</Cx>
+            <Cy>0</Cy>
+            <focalLength>0</focalLength>
+            <hackBaseline>0</hackBaseline>
           </plugin>
         </sensor>
         <inertial>
@@ -546,7 +549,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -559,7 +562,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -595,7 +598,7 @@
                 <soft_erp>0.2</soft_erp>
                 <kp>1e+13</kp>
                 <kd>1</kd>
-                <max_vel>100.00</max_vel>
+                <max_vel>100</max_vel>
                 <min_depth>0</min_depth>
               </ode>
               <bullet>
@@ -612,7 +615,7 @@
       </link>
       <static>0</static>
       <allow_auto_disable>1</allow_auto_disable>
-      <pose>0 16 0.45811 0 0 0</pose>
+      <pose>0 16 0.45811 0 -0 0</pose>
     </model>
     <model name='bowling_pin_clone'>
       <link name='link_0'>
@@ -637,7 +640,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -650,7 +653,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -728,7 +731,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -741,7 +744,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -819,7 +822,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -832,7 +835,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -910,7 +913,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -923,7 +926,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1001,7 +1004,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1014,7 +1017,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1092,7 +1095,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1105,7 +1108,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1183,7 +1186,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1196,7 +1199,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1274,7 +1277,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1287,7 +1290,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1365,7 +1368,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -1378,7 +1381,7 @@
           <pose>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>model://bowling_pin_black/meshes/bowling-pin-black.obj</uri>
+              <uri>model://bowling_pin/meshes/bowling-pin.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>

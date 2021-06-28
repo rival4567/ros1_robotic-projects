@@ -63,11 +63,10 @@ include_directories(${Boost_INCLUDE_DIRS})
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+  FILES
+  dest.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -84,10 +83,10 @@ include_directories(${Boost_INCLUDE_DIRS})
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   geometry_msgs#   std_msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  geometry_msgs  std_msgs   nav_msgs  sensor_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##

@@ -10,7 +10,7 @@
   <arg name="extra_gazebo_args" default="--verbose"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find pkg_gazebo)/worlds/bowling_game.world"/>
+    <arg name="world_name" value="$(find pkg_gazebo)/worlds/bowling_empty.world"/>
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)"/>
@@ -28,5 +28,9 @@
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
         args="-x 0 -y 0 -z 0.5 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
+
+  <node name="node_control_bowling_game" pkg="pkg_gazebo" type="node_control_bowling_ball.py"/>
+
+  <node name="node_bowling_pin_cam" pkg="pkg_gazebo" type="node_bowling_pin_cam.py"/>
 
 </launch>

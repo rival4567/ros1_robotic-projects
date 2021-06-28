@@ -125,8 +125,8 @@
           <surface>
             <friction>
               <ode>
-                <mu>1</mu>
-                <mu2>1</mu2>
+                <mu>100</mu>
+                <mu2>100</mu2>
                 <fdir1>0 0 0</fdir1>
                 <slip1>0</slip1>
                 <slip2>0</slip2>
@@ -181,9 +181,9 @@
               <iyz>0</iyz>
               <izz>166.667</izz>
             </inertia>
-            <pose>0 0 0.1 0 -0 0</pose>
+            <pose>0 0 0.11 0 -0 0</pose>
           </inertial>
-          <pose>0 0 0.1 1.5707 -0 0</pose>
+          <pose>0 0 0.11 1.5707 -0 0</pose>
           <gravity>1</gravity>
           <self_collide>0</self_collide>
           <kinematic>0</kinematic>
@@ -212,9 +212,9 @@
             <surface>
               <friction>
                 <ode>
-                  <mu>0.2</mu>
-                  <mu2>0.2</mu2>
-                  <fdir1>0.1 0.2 0</fdir1>
+                  <mu>100</mu>
+                  <mu2>100</mu2>
+                  <fdir1>0 0 0</fdir1>
                   <slip1>0</slip1>
                   <slip2>0</slip2>
                 </ode>
@@ -256,11 +256,11 @@
             </surface>
           </collision>
         </link>
-        <static>0</static>
+        <static>1</static>
         <allow_auto_disable>1</allow_auto_disable>
         <pose>-0.0022 -4.46599 0.015018 0 -0 0</pose>
       </model>
-      <joint name='link_0_JOINT_0' type='fixed'>
+      <!-- <joint name='link_0_JOINT_0' type='fixed'>
         <parent>link_0</parent>
         <child>bowling_alley::link_0</child>
         <pose>0 0 0 0 0 0</pose>
@@ -276,7 +276,7 @@
             </suspension>
           </ode>
         </physics>
-      </joint>
+      </joint> -->
       <static>0</static>
       <allow_auto_disable>1</allow_auto_disable>
       <pose>0 3.56533 0.140017 0 -0 0</pose>
