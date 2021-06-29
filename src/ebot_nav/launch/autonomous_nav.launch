@@ -1,0 +1,35 @@
+<launch>
+
+
+  <!--- Run AMCL -->
+  <include file="$(find ebot_nav)/launch/ebot_amcl.launch" />
+  
+  <include file="$(find ebot_description)/launch/ebot_visualize.launch" />
+
+  <arg name="map_file" default="$(find ebot_nav)/maps/map_task2.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  
+
+  <!-- Run move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find ebot_nav)/config/move_base_params.yaml" command="load" />
+    <rosparam file="$(find ebot_nav)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find ebot_nav)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find ebot_nav)/config/local_costmap_params.yaml" command="load" />
+    <param name="local_costmap/width" value="10.0"/>
+    <param name="local_costmap/height" value="10.0"/>
+    <rosparam file="$(find ebot_nav)/config/global_costmap_params_map.yaml" command="load" />
+    <rosparam file="$(find ebot_nav)/config/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find ebot_nav)/config/global_planner_params.yaml" command="load" />
+
+    <param name="base_global_planner" value="navfn/NavfnROS" />
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    <param name="controller_frequency" value="5.0" />
+    <param name="controller_patience" value="15.0" />
+  </node>
+
+  <!-- Run Python file for navigation -->
+  <node pkg="ebot_nav" name="move_base_sequence" type="goal.py" > 
+  </node>
+
+</launch>
