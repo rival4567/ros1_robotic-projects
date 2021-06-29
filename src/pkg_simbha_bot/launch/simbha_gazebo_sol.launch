@@ -2,6 +2,6 @@
 
   <include file = "$(find simbha_model)/launch/simbha_gazebo.launch" />
   <include file = "$(find pkg_simbha_bot)/launch/rviz.launch" />
-  <include file = "$(find pkg_simbha_bot)/launch/depth_to_laser_scan.launch" />
+  <include file = "$(find pkg_simbha_bot)/launch/pointcloud_to_laserscan.launch" />
 
 </launch>

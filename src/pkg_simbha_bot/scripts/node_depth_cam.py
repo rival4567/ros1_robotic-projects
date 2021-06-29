@@ -15,7 +15,7 @@ def clbk_cam(msg):
     points.data = msg.data
     points.fields = msg.fields
     # print(points.point_step, points.row_step)
-    print(len(points.data))
+    print(points.height)
 
 
 def main():

@@ -125,7 +125,7 @@ class ObstacleAvoider(object):
         if self.regions['front'] > 0.50 and self.regions['front'] < 1:
             self.robot_state = 1
 
-        if self.robot_state is 0:
+        if self.robot_state == 0:
             if self.move_state is 0:
                 self.fix_yaw(FINAL_TARGET)
                 rospy.loginfo('Fixing Heading to reach Target')
@@ -133,7 +133,7 @@ class ObstacleAvoider(object):
                 self.go_straight_ahead(FINAL_TARGET)
                 rospy.loginfo('Moving towards the Target')
 
-        if self.robot_state is 1:
+        if self.robot_state == 1:
             err_yaw = self.error_angle(FINAL_TARGET)
             if math.fabs(err_yaw) < (math.pi / 6) and \
                     self.regions['front'] > 1.5 and self.regions['fright'] > 1 and self.regions['fleft'] > 1:
@@ -185,12 +185,18 @@ class ObstacleAvoider(object):
         self.publisher_.publish(self.velocity_msg)
         # rospy.loginfo('%s'%str(self.velocity_msg))
 
+    def check_sensors_for_nan(self, regions):
+        for key in regions.keys():
+            if regions[key] != regions[key]:
+                regions[key] = math.inf
+        return regions
+
     def take_action(self, regions):
 
         if self.robot_state is 1:
             state_description = ''
-            d = 1.50
-
+            d = 1.5
+            regions = self.check_sensors_for_nan(regions)
             if regions['front'] > d and regions['fleft'] > d and regions['fright'] > d:
                 state_description = 'case 1 - nothing'
                 self.obstacle_avoidance_state = 0

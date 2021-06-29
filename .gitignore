@@ -3,3 +3,4 @@ build/
 src/mdbook_ros-noetic
 src/gzmaze/
 src/simbha_robot
+src/sahayak_bot
