@@ -159,11 +159,11 @@ class ObstacleAvoider(object):
 
     def laserscan_callback(self, msg):
         self.regions = {
-            'right': min(min(msg.ranges[0:143]), MX_RANGE),
-            'fright': min(min(msg.ranges[144:287]), MX_RANGE),
-            'front': min(min(msg.ranges[288:431]), MX_RANGE),
-            'fleft': min(min(msg.ranges[432:575]), MX_RANGE),
-            'left': min(min(msg.ranges[576:719]), MX_RANGE),
+            'right': min(min(msg.ranges[0:127]), MX_RANGE),
+            'fright': min(min(msg.ranges[128:255]), MX_RANGE),
+            'front': min(min(msg.ranges[256:383]), MX_RANGE),
+            'fleft': min(min(msg.ranges[384:511]), MX_RANGE),
+            'left': min(min(msg.ranges[512:640]), MX_RANGE),
         }
         self.take_action(self.regions)
 
