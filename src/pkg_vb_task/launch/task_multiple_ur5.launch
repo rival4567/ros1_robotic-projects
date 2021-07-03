@@ -35,6 +35,6 @@
     <node name= "node_service_server_vacuum_gripper_ur5_2" pkg= "pkg_vb_sim" type="node_service_server_vacuum_gripper_ur5_2.py" output="screen"/>
 
     <!-- Run Conveyor Belt Service Server -->
-    <node name= "node_service_server_conveyor_belt" pkg= "pkg_vb_sim" type="node_service_server_conveyor_belt.py" output="screen"/>
+    <node name= "node_conveyor_belt" pkg= "pkg_vb_task" type="node_conveyor_belt.py" output="screen"/>
 	
 </launch>

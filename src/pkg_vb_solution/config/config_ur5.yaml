@@ -1,0 +1,32 @@
+# This file overwrites some of the config of ompl_planning.yaml
+# This file also creates a new planner
+# Optimization objective types
+    # PathLengthOptimizationObjective (Default)
+    # MechanicalWorkOptimizationObjective
+    # MaximizeMinClearanceObjective
+    # StateCostIntegralObjective
+    # MinimaxObjective
+
+ur5_1:
+  move_group:
+    planner_configs:
+      myRRTStar:
+        type: geometric::RRTstar
+        optimization_objective: PathLengthOptimizationObjective
+        range: 0.0
+        # goal_bias: 0
+        # delay_collision_checking: 1
+    manipulator:
+      default_planner_config: myRRTStar # Change this to use different planners
+
+ur5_2:
+  move_group:
+    planner_configs:
+      myRRTStar:
+        type: geometric::RRTstar
+        optimization_objective: PathLengthOptimizationObjective
+        range: 0.0
+        # goal_bias: 0.05
+        # delay_collision_checking: 1
+    manipulator:
+      default_planner_config: myRRTStar

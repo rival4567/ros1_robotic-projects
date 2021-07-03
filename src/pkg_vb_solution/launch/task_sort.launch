@@ -1,0 +1,6 @@
+<launch>
+    <rosparam file="$(find pkg_vb_solution)/config/config_env.yaml"/>
+    <rosparam file="$(find pkg_vb_solution)/config/config_ur5.yaml"/>
+    <include file="$(find pkg_vb_task)/launch/task_multiple_ur5.launch"/>
+    <node name="node_sort_packages" pkg="pkg_vb_solution" type="node_sort_packages.py" output="screen"/>
+</launch>

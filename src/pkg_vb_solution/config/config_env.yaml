@@ -1,0 +1,11 @@
+# Custom Simulation Environment Configuration
+env:
+  topic:
+    logical_camera_prefix: "/eyrc/vb/ur5_"
+    logical_camera_suffix: "/vacuum_gripper/logical_camera/ur5_"
+    # camera_2D: "/eyrc/vb/camera_1/image_raw"
+  service:  
+    vacuum_gripper_prefix: "/eyrc/vb/ur5/activate_vacuum_gripper"
+    # camera_1: "/eyrc/vb0252/2DCamera/capture_pkgs"
+    conveyor_belt: "/eyrc/vb/conveyor/set_power"
+  delimiter: "ur5_"

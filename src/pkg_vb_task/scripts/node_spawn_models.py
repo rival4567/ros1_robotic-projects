@@ -382,43 +382,33 @@ if __name__ == '__main__':
     rospy.sleep(5)
 
     # Spawn Box
-    req1 = create_cube_request(sdf_cube_red, "packagen00",
-                               -0.8, 0.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
+    req1 = create_cube_request(sdf_cube_green, "packagen00",
+                               -0.8, 1.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
                                0.0, 0.0, 0.0,  # rotation
                                0.15, 0.15, 0.15)  # size
 
     req2 = create_cube_request(sdf_cube_green, "packagen01",
-                               -0.66, 1.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
+                               -0.8, 2.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
                                0.0, 0.0, 0.0,  # rotation
                                0.15, 0.15, 0.15)  # size
 
-    req3 = create_cube_request(sdf_cube_blue, "packagen02",
-                               -0.90, 2.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
+    req3 = create_cube_request(sdf_cube_green, "packagen02",
+                               -0.80, 3.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
                                0.0, 0.0, 0.0,  # rotation
                                0.15, 0.15, 0.15)  # size
 
-    req4 = create_cube_request(sdf_cube_red, "packagen10",
-                               -0.6, 3.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
-                               0.0, 0.0, 0.0,  # rotation
-                               0.15, 0.15, 0.15)  # size
-
-    req5 = create_cube_request(sdf_cube_blue, "packagen11",
+    req4 = create_cube_request(sdf_cube_green, "packagen10",
                                -0.8, 4.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
                                0.0, 0.0, 0.0,  # rotation
                                0.15, 0.15, 0.15)  # size
 
+    req5 = create_cube_request(sdf_cube_green, "packagen11",
+                               -0.8, 5.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
+                               0.0, 0.0, 0.0,  # rotation
+                               0.15, 0.15, 0.15)  # size
+
     req6 = create_cube_request(sdf_cube_green, "packagen12",
-                               -0.90, 5.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
-                               0.0, 0.0, 0.0,  # rotation
-                               0.15, 0.15, 0.15)  # size
-
-    req7 = create_cube_request(sdf_cube_red, "packagen20",
-                               -0.7, 6.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
-                               0.0, 0.0, 0.0,  # rotation
-                               0.15, 0.15, 0.15)  # size
-
-    req8 = create_cube_request(sdf_cube_red, "packagen21",
-                               -0.80, 7.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
+                               -0.80, 6.80, 1.0,  # position -x 1.2 -y -2.5 -z 0.94
                                0.0, 0.0, 0.0,  # rotation
                                0.15, 0.15, 0.15)  # size
 
@@ -439,11 +429,5 @@ if __name__ == '__main__':
 
     rospy.sleep(1)
     spawn_srv.call(req6)
-
-    rospy.sleep(1)
-    spawn_srv.call(req7)
-
-    rospy.sleep(1)
-    spawn_srv.call(req8)
 
     rospy.sleep(1.0)
