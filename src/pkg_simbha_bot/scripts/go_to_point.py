@@ -1,27 +1,27 @@
 #!/usr/bin/env python3
 
-import rclpy
-from rclpy.node import Node
+import rospy
+
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist, Point
 from sensor_msgs.msg import LaserScan
+from tf import transformations
 
 import math
 
-MX_RANGE = 2
+MX_RANGE = 10
 
 FINAL_TARGET = Point()
 FINAL_TARGET.x = 1.0
 FINAL_TARGET.y = 1.0
 
-YAW_PRECISSION = 5 * (math.pi / 180)  # 5 degrees
-DIST_PRECISSION = 0.10
+YAW_PRECISION = 5 * (math.pi / 180)  # 5 degrees
+DIST_PRECISION = 0.10
 
 
-class ObstacleAvoider(Node):
+class ObstacleAvoider(object):
 
     def __init__(self):
-        super().__init__('simbha_mover')
 
         self.regions = {
             'right': 0.0,
@@ -39,22 +39,13 @@ class ObstacleAvoider(Node):
         self.pose = [0.0, 0.0, 0.0]
         self.curr_position = Point()
 
-        self.publisher_ = self.create_publisher(Twist, '/simbha_cmd_vel', 10)
-        self.subscription = self.create_subscription(
-            Odometry,
-            '/odom',
-            self.odom_callback,
-            10)
+        self.publisher_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
+        self.subscription = rospy.Subscriber(
+            '/odom', Odometry, self.odom_callback)
 
-        self.subscription = self.create_subscription(
-            LaserScan,
-            '/simbha_bot/scan',
-            self.laserscan_callback,
-            10)
-
-        timer_period = 0.1  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)
-
+        self.subscription = rospy.Subscriber(
+            '/scan', LaserScan, self.laserscan_callback)
+        self.rate = rospy.Rate(20)
     # angle difference or yaw between any point and the bot.
 
     def error_angle(self, point):
@@ -79,7 +70,7 @@ class ObstacleAvoider(Node):
     def fix_yaw(self, des_pos):
         err_yaw = self.error_angle(des_pos)
 
-        if math.fabs(err_yaw) > YAW_PRECISSION:
+        if math.fabs(err_yaw) > YAW_PRECISION:
             if err_yaw > 0:
                 self.velocity_msg.linear.x = 0.0
                 self.velocity_msg.angular.z = 0.5
@@ -87,7 +78,7 @@ class ObstacleAvoider(Node):
                 self.velocity_msg.linear.x = 0.0
                 self.velocity_msg.angular.z = -0.5
 
-        if math.fabs(err_yaw) < YAW_PRECISSION:
+        if math.fabs(err_yaw) < YAW_PRECISION:
             self.move_state = 1
 
         self.publisher_.publish(self.velocity_msg)
@@ -99,16 +90,16 @@ class ObstacleAvoider(Node):
         curr_pos.y = self.pose[1]
         err_pos = self.calc_dist_points(des_pos, curr_pos)
 
-        if err_pos > DIST_PRECISSION:
+        if err_pos > DIST_PRECISION:
 
             self.velocity_msg.linear.x = 0.55
-            self.velocity_msg.angular.z = 0.0 if err_yaw > YAW_PRECISSION else -0.0
+            self.velocity_msg.angular.z = 0.0 if err_yaw > YAW_PRECISION else -0.0
             self.publisher_.publish(self.velocity_msg)
         else:
             self.done()
 
         # state change conditions
-        if math.fabs(err_yaw) > YAW_PRECISSION:
+        if math.fabs(err_yaw) > YAW_PRECISION:
             self.move_state = 0
 
     def done(self):
@@ -160,18 +151,18 @@ class ObstacleAvoider(Node):
         if self.robot_state == 0:
             if self.move_state == 0:
                 self.fix_yaw(FINAL_TARGET)
-                self.get_logger().info('Fixing Heading to reach Target')
+                rospy.loginfo('Fixing Heading to reach Target')
             elif self.move_state == 1:
                 self.go_straight_ahead(FINAL_TARGET)
-                self.get_logger().info('Moving towards the Target')
+                rospy.loginfo('Moving towards the Target')
 
     def laserscan_callback(self, msg):
         self.regions = {
-            'right': min(min(msg.ranges[0:143]), MX_RANGE),
-            'fright': min(min(msg.ranges[144:287]), MX_RANGE),
-            'front': min(min(msg.ranges[288:431]), MX_RANGE),
-            'fleft': min(min(msg.ranges[432:575]), MX_RANGE),
-            'left': min(min(msg.ranges[576:719]), MX_RANGE),
+            'right': min(min(msg.ranges[0:127]), MX_RANGE),
+            'fright': min(min(msg.ranges[128:255]), MX_RANGE),
+            'front': min(min(msg.ranges[256:383]), MX_RANGE),
+            'fleft': min(min(msg.ranges[384:511]), MX_RANGE),
+            'left': min(min(msg.ranges[512:640]), MX_RANGE),
         }
         # self.take_action(self.regions)
 
@@ -216,37 +207,28 @@ class ObstacleAvoider(Node):
             angular_z = 0.0
         else:
             state_description = 'unknown case'
-            self.get_logger().info('Laser_scan_data: "%s"' % str(self.regions))
+            rospy.loginfo('Laser_scan_data: "%s"' % str(self.regions))
 
-        self.get_logger().info('State_description: "%s"' % str(state_description))
+        rospy.loginfo('State_description: "%s"' % str(state_description))
         msg.linear.x = linear_x
         msg.angular.z = angular_z
         self.publisher_.publish(msg)
 
-    def timer_callback(self):
-
         if self.reached_destination is True:
-            self.get_logger().info('Target Reached')
+            rospy.loginfo('Target Reached')
             quit()
         else:
             self.reach_goal()
 
-        # self.get_logger().info('Odom: "%s"' % str(self.pose))
-        # self.get_logger().info('Laser_scan_data: "%s"' % str(self.regions))
 
-
-def main(args=None):
-    rclpy.init(args=args)
+def main():
+    rospy.init_node('node_go_to_point')
 
     simbha_mover = ObstacleAvoider()
 
-    rclpy.spin(simbha_mover)
-
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
-    simbha_mover.destroy_node()
-    rclpy.shutdown()
+    while not rospy.is_shutdown():
+        simbha_mover.reach_goal()
+        simbha_mover.rate.sleep()
 
 
 if __name__ == '__main__':
