@@ -1,277 +1,162 @@
-#!/usr/bin/env python3
+#! /usr/bin/env python3
 
+# import ros stuff
 import rospy
 
-from nav_msgs.msg import Odometry
-from geometry_msgs.msg import Twist, Point
 from sensor_msgs.msg import LaserScan
+from geometry_msgs.msg import Twist, Point
+from nav_msgs.msg import Odometry
+from micromouse.msg import dest
 from tf import transformations
+from std_srvs.srv import *
 
 import math
 
-MX_RANGE = 2
+active_ = False
 
-FINAL_TARGET = Point()
-FINAL_TARGET.x = 0.0
-FINAL_TARGET.y = 0.0
+# robot state variables
+position_ = Point()
+yaw_ = 0
+# machine state
+state_ = 0
+# goal
+desired_position_ = Point()
+desired_position_.x = 0
+desired_position_.y = 0
+desired_position_.z = 0
+# parameters
+yaw_precision_ = math.pi / 90  # +/- 2 degree allowed
+dist_precision_ = 0.01
+# publishers
+pub = None
 
-YAW_PRECISION = 5 * (math.pi / 180)  # 5 degrees
-DIST_PRECISION = 0.10
+# service callbacks
 
 
-class Micromouse(object):
+def go_to_point_switch(req):
+    global active_
+    active_ = req.data
+    res = SetBoolResponse()
+    res.success = True
+    res.message = 'Done!'
+    return res
 
-    def __init__(self):
+# callbacks
 
-        self.regions = {
-            'right': 0.0,
-            'fright': 0.0,
-            'front': 0.0,
-            'fleft': 0.0,
-            'left': 0.0
-        }
 
-        self.velocity_msg = Twist()
-        self.move_state = 0
-        self.obstacle_avoidance_state = 0
-        self.robot_state = 0
-        self.reached_destination = False
+def clbk_odom(msg):
+    global position_
+    global yaw_
 
-        self.pose = [0.0, 0.0, 0.0]
-        self.curr_position = Point()
+    # position
+    position_ = msg.pose.pose.position
 
-        self.publisher_ = rospy.Publisher(
-            '/micromouse/cmd_vel', Twist, queue_size=1)
-        self.sub_odom = rospy.Subscriber(
-            '/micromouse/odom', Odometry, self.odom_callback)
+    # yaw
+    quaternion = (
+        msg.pose.pose.orientation.x,
+        msg.pose.pose.orientation.y,
+        msg.pose.pose.orientation.z,
+        msg.pose.pose.orientation.w)
+    euler = transformations.euler_from_quaternion(quaternion)
+    # fixing joint pos by subtracting 90 degrees because they're different in gazebo and ROS
+    yaw_ = euler[2] - math.pi/2
 
-        self.sub_laser = rospy.Subscriber(
-            '/micromouse/scan', LaserScan, self.laserscan_callback)
 
-        self.rate = rospy.Rate(20)
+def clbk_dest(msg):
+    global desired_position_
+    desired_position_.x = msg.dest_x_coordinate
+    desired_position_.y = msg.dest_y_coordinate
+    rospy.loginfo(msg)
 
-    # angle difference or yaw between any point and the bot.
-    def error_angle(self, point):
-        rx = self.pose[0]
-        ry = self.pose[1]
-        theta = self.pose[2]*(math.pi/180)
-        theta_goal = math.atan2(point.y - ry, point.x - rx)
-        error = self.normalize_angle(theta_goal - theta)
-        return error
 
-    # function that gives linear distance between any point and the bot.
-    def calc_dist_points(self, point1, point2):
-        dist = math.sqrt((point1.y - point2.y)**2 + (point1.x - point2.x)**2)
-        return dist
+def change_state(state):
+    global state_
+    state_ = state
+    print('State changed to [%s]' % state_)
 
-    # function to limit the bot rotation between -pi to pi
-    def normalize_angle(self, angle):
-        if(math.fabs(angle) > math.pi):
-            angle = angle - (2 * math.pi * angle) / (math.fabs(angle))
-        return angle
 
-    def fix_yaw(self, des_pos):
-        err_yaw = self.error_angle(des_pos)
+def normalize_angle(angle):
+    if(math.fabs(angle) > math.pi):
+        angle = angle - (2 * math.pi * angle) / (math.fabs(angle))
+    return angle
 
-        if math.fabs(err_yaw) > YAW_PRECISION:
-            if err_yaw > 0:
-                self.velocity_msg.linear.x = 0.0
-                self.velocity_msg.angular.z = 0.5
-            else:
-                self.velocity_msg.linear.x = 0.0
-                self.velocity_msg.angular.z = -0.5
 
-        if math.fabs(err_yaw) < YAW_PRECISION:
-            self.move_state = 1
+def fix_yaw(des_pos):
+    global yaw_, pub, yaw_precision_, state_
+    desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
+    err_yaw = normalize_angle(desired_yaw - yaw_)
 
-        self.publisher_.publish(self.velocity_msg)
+    # rospy.loginfo(err_yaw)
 
-    def go_straight_ahead(self, des_pos):
-        err_yaw = self.error_angle(des_pos)
-        curr_pos = Point()
-        curr_pos.x = self.pose[0]
-        curr_pos.y = self.pose[1]
-        err_pos = self.calc_dist_points(des_pos, curr_pos)
+    twist_msg = Twist()
+    if math.fabs(err_yaw) > yaw_precision_:
+        twist_msg.angular.z = 0.7 if err_yaw > 0 else -0.7
 
-        if err_pos > DIST_PRECISION:
+    pub.publish(twist_msg)
 
-            self.velocity_msg.linear.x = 0.55
-            self.velocity_msg.angular.z = 0.0 if err_yaw > YAW_PRECISION else -0.0
-            self.publisher_.publish(self.velocity_msg)
-        else:
-            self.done()
+    # state change conditions
+    if math.fabs(err_yaw) <= yaw_precision_:
+        print('Yaw error: [%s]' % err_yaw)
+        change_state(1)
 
-        # state change conditions
-        if math.fabs(err_yaw) > YAW_PRECISION:
-            self.move_state = 0
 
-    def done(self):
-        self.velocity_msg.linear.x = 0.0
-        self.velocity_msg.angular.z = 0.0
-        self.publisher_.publish(self.velocity_msg)
-        self.reached_destination = True
+def go_straight_ahead(des_pos):
+    global yaw_, pub, yaw_precision_, state_
+    desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
+    err_yaw = desired_yaw - yaw_
+    err_pos = math.sqrt(pow(des_pos.y - position_.y, 2) +
+                        pow(des_pos.x - position_.x, 2))
 
-    def odom_callback(self, data):
-        quaternion = (data.pose.pose.orientation.x,
-                      data.pose.pose.orientation.y,
-                      data.pose.pose.orientation.z,
-                      data.pose.pose.orientation.w)
-        self.curr_position = data.pose.pose.position
-        self.pose = [data.pose.pose.position.x,
-                     data.pose.pose.position.y,
-                     transformations.euler_from_quaternion(quaternion)[2]-math.pi/2]
+    if err_pos > dist_precision_:
+        twist_msg = Twist()
+        twist_msg.linear.x = 0.3
+        # twist_msg.angular.z = 0.2 if err_yaw > 0 else -0.2
+        pub.publish(twist_msg)
+    else:
+        print('Position error: [%s]' % err_pos)
+        change_state(2)
 
-    def reach_goal(self):
+    # state change conditions
+    if math.fabs(err_yaw) > yaw_precision_:
+        print('Yaw error: [%s]' % err_yaw)
+        change_state(0)
 
-        if self.regions['front'] > 0.50 and self.regions['front'] < 1:
-            self.robot_state = 1
 
-        if self.robot_state == 0:
-            if self.move_state == 0:
-                self.fix_yaw(FINAL_TARGET)
-                rospy.loginfo('Fixing Heading to reach Target')
-            elif self.move_state == 1:
-                self.go_straight_ahead(FINAL_TARGET)
-                rospy.loginfo('Moving towards the Target')
-
-        if self.robot_state == 1:
-            err_yaw = self.error_angle(FINAL_TARGET)
-            if math.fabs(err_yaw) < (math.pi / 6) and \
-                    self.regions['front'] > 1.5 and self.regions['fright'] > 1 and self.regions['fleft'] > 1:
-                # print ('less than 30')
-                self.robot_state = 0
-
-            # between 30 and 90
-            elif err_yaw > 0 and \
-                    math.fabs(err_yaw) > (math.pi / 6) and \
-                    math.fabs(err_yaw) < (math.pi / 2) and \
-                    self.regions['left'] > 1.5 and self.regions['fleft'] > 1:
-                # print ('between 30 and 90 - to the left')
-                self.robot_state = 0
-
-            elif err_yaw < 0 and \
-                    math.fabs(err_yaw) > (math.pi / 6) and \
-                    math.fabs(err_yaw) < (math.pi / 2) and \
-                    self.regions['right'] > 1.5 and self.regions['fright'] > 1:
-                # print ('between 30 and 90 - to the right')
-                self.robot_state = 0
-
-            self.follow_wall()
-
-    def laserscan_callback(self, msg):
-        self.regions = {
-            'right': min(min(msg.ranges[0:127]), MX_RANGE),
-            'fright': min(min(msg.ranges[128:255]), MX_RANGE),
-            'front': min(min(msg.ranges[256:383]), MX_RANGE),
-            'fleft': min(min(msg.ranges[384:511]), MX_RANGE),
-            'left': min(min(msg.ranges[512:640]), MX_RANGE),
-        }
-        self.take_action(self.regions)
-
-    def find_wall(self):
-
-        self.velocity_msg.linear.x = 0.55
-        self.velocity_msg.angular.z = -0.25
-        self.publisher_.publish(self.velocity_msg)
-
-    def turn_left(self):
-        self.velocity_msg.linear.x = 0.0
-        self.velocity_msg.angular.z = 0.55
-        self.publisher_.publish(self.velocity_msg)
-
-    def follow_the_wall(self):
-
-        self.velocity_msg.linear.x = 0.35
-        self.velocity_msg.angular.z = 0.0
-        self.publisher_.publish(self.velocity_msg)
-        # rospy.loginfo('%s'%str(self.velocity_msg))
-
-    def check_sensors_for_nan(self, regions):
-        for key in regions.keys():
-            if regions[key] != regions[key]:
-                regions[key] = math.inf
-        return regions
-
-    def take_action(self, regions):
-
-        if self.robot_state == 1:
-            state_description = ''
-            d = 1.5
-            regions = self.check_sensors_for_nan(regions)
-            if regions['front'] > d and regions['fleft'] > d and regions['fright'] > d:
-                state_description = 'case 1 - nothing'
-                self.obstacle_avoidance_state = 0
-
-            elif regions['front'] < d and regions['fleft'] > d and regions['fright'] > d:
-                state_description = 'case 2 - front'
-                self.obstacle_avoidance_state = 1
-
-            elif regions['front'] > d and regions['fleft'] > d and regions['fright'] < d:
-                state_description = 'case 3 - fright'
-                self.obstacle_avoidance_state = 2
-
-            elif regions['front'] > d and regions['fleft'] < d and regions['fright'] > d:
-                state_description = 'case 4 - fleft'
-                self.obstacle_avoidance_state = 0
-
-            elif regions['front'] < d and regions['fleft'] > d and regions['fright'] < d:
-                state_description = 'case 5 - front and fright'
-                self.obstacle_avoidance_state = 1
-
-            elif regions['front'] < d and regions['fleft'] < d and regions['fright'] > d:
-                state_description = 'case 6 - front and fleft'
-                self.obstacle_avoidance_state = 1
-
-            elif regions['front'] < d and regions['fleft'] < d and regions['fright'] < d:
-                state_description = 'case 7 - front and fleft and fright'
-                self.obstacle_avoidance_state = 1
-
-            elif regions['front'] > d and regions['fleft'] < d and regions['fright'] < d:
-                state_description = 'case 8 - fleft and fright'
-                self.obstacle_avoidance_state = 0
-
-            else:
-                state_description = 'unknown case'
-                rospy.loginfo('Laser_scan_data: "%s"' % str(self.regions))
-
-    # def go_forward_safe_distance(self, pos):
-    #     # theta = arc / radius
-    #     constant = 1
-    #     arc = math.pi/3 * 1.5 * constant
-    #     curr_pos = Point()
-    #     curr_pos.x = self.pose[0]
-    #     curr_pos.y = self.pose[1]
-    #     distance = self.calc_dist_points(curr_pos, pos)
-    #     while distance < arc:
-    #         self.velocity_msg.linear.x = 0.35
-    #         self.velocity_msg.angular.z = 0.0
-    #         self.publisher_.publish(self.velocity_msg)
-
-    def follow_wall(self):
-        if self.obstacle_avoidance_state == 0:
-            rospy.loginfo('Finding nearby wall')
-            self.find_wall()
-        elif self.obstacle_avoidance_state == 1:
-            rospy.loginfo('Turning Left')
-            self.turn_left()
-        elif self.obstacle_avoidance_state == 2:
-            rospy.loginfo('Following the wall')
-            # while self.regions['fright'] < 1.5:
-            #     rospy.loginfo("STUCK IN")
-            self.follow_the_wall()
-            # pos = Point()
-            # pos.x = self.pose[0]
-            # pos.y = self.pose[1]
-            # self.go_forward_safe_distance(pos)
+def done():
+    twist_msg = Twist()
+    twist_msg.linear.x = 0
+    twist_msg.angular.z = 0
+    pub.publish(twist_msg)
 
 
 def main():
-    rospy.init_node('node_bug_algorithm')
+    global pub, active_
 
-    mouse = Micromouse()
+    rospy.init_node('go_to_point')
+
+    pub = rospy.Publisher('/micromouse/cmd_vel', Twist, queue_size=1)
+
+    sub_odom = rospy.Subscriber('/micromouse/odom', Odometry, clbk_odom)
+
+    sub_dest = rospy.Subscriber('/micromouse/dest', dest, clbk_dest)
+
+    srv = rospy.Service('go_to_point_switch', SetBool, go_to_point_switch)
+
+    rate = rospy.Rate(20)
     while not rospy.is_shutdown():
-        mouse.reach_goal()
-        mouse.rate.sleep()
+        if not active_:
+            continue
+        else:
+            if state_ == 0:
+                fix_yaw(desired_position_)
+            elif state_ == 1:
+                go_straight_ahead(desired_position_)
+            elif state_ == 2:
+                done()
+            else:
+                rospy.logerr('Unknown state!')
+
+        rate.sleep()
 
 
 if __name__ == '__main__':

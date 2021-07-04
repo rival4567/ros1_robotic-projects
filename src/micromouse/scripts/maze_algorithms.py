@@ -250,7 +250,7 @@ if __name__ == '__main__':
             pass
 
         rospy.loginfo("Creating subscribers...")
-        odom_sub = message_filters.Subscriber('micromouse/odom', Odometry)
+        odom_sub = message_filters.Subscriber('/micromouse/odom', Odometry)
         scan_sub = message_filters.Subscriber(
             '/micromouse/laser/scan', LaserScan)
         rospy.loginfo("Done")
@@ -258,12 +258,12 @@ if __name__ == '__main__':
         rospy.loginfo(
             "Creating time synchronizer between odom and laser scan...")
         ts = message_filters.ApproximateTimeSynchronizer(
-            [odom_sub, scan_sub], queue_size=10, slop=0.1)
+            [odom_sub, scan_sub], queue_size=1, slop=0.1)
         ts.registerCallback(maze_obj.mazeCallback)
         rospy.loginfo("Done")
 
         rospy.loginfo("Creating publisher...")
-        dest_pub = rospy.Publisher('/dest', dest, queue_size=1)
+        dest_pub = rospy.Publisher('/micromouse/dest', dest, queue_size=1)
 
         loop_rate = rospy.Rate(1)
         while not rospy.is_shutdown():
