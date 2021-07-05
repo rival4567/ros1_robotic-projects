@@ -90,7 +90,7 @@ def fix_yaw(des_pos):
 
     twist_msg = Twist()
     if math.fabs(err_yaw) > yaw_precision_:
-        twist_msg.angular.z = 0.7 if err_yaw > 0 else -0.7
+        twist_msg.angular.z = 0.2 if err_yaw > 0 else -0.2
 
     pub.publish(twist_msg)
 
@@ -109,8 +109,8 @@ def go_straight_ahead(des_pos):
 
     if err_pos > dist_precision_:
         twist_msg = Twist()
-        twist_msg.linear.x = 0.3
-        # twist_msg.angular.z = 0.2 if err_yaw > 0 else -0.2
+        twist_msg.linear.x = 0.7
+        # twist_msg.angular.z = 0.05 if err_yaw > 0 else -0.05
         pub.publish(twist_msg)
     else:
         print('Position error: [%s]' % err_pos)
@@ -138,7 +138,8 @@ def main():
 
     sub_odom = rospy.Subscriber('/micromouse/odom', Odometry, clbk_odom)
 
-    sub_dest = rospy.Subscriber('/micromouse/dest', dest, clbk_dest)
+    sub_dest = rospy.Subscriber(
+        '/micromouse/dest', dest, clbk_dest)
 
     srv = rospy.Service('go_to_point_switch', SetBool, go_to_point_switch)
 

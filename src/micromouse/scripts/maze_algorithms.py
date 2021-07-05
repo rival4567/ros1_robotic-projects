@@ -33,7 +33,7 @@ class Maze:
         # Ensure that: N*(s+d)+d = total side length of maze
 
         # Tunable heuristics
-        self.confidence_threshold = 10
+        self.confidence_threshold = 16
         self.lower_thres = 0.2
         self.upper_thres = 0.8
         self.center_precision = 0.04  # (metres)
@@ -132,8 +132,7 @@ class Maze:
                 odom.pose.pose.orientation.z,
                 odom.pose.pose.orientation.w)
             rpy = tf.transformations.euler_from_quaternion(quaternion)
-            # By default bot is facing -Y (East direction)
-            theta_bot = rpy[2] - math.pi/2
+            theta_bot = rpy[2]
 
             if self.run_number != 1:
                 # Obtain (x,y) of laser end-points from /scan + /odom
@@ -265,7 +264,7 @@ if __name__ == '__main__':
         rospy.loginfo("Creating publisher...")
         dest_pub = rospy.Publisher('/micromouse/dest', dest, queue_size=1)
 
-        loop_rate = rospy.Rate(1)
+        loop_rate = rospy.Rate(20)
         while not rospy.is_shutdown():
             # rospy.loginfo("Running")
             if maze_obj.goal is not None:
