@@ -15,7 +15,7 @@
          <!--The maximum range returned (in meters). Greater than this range will be output as +Inf. -->
     <param name="range_max" value="8.00"/>
         <!-- The frame id of the laser scan -->
-    <param name="output_frame_id" value="kinect_link"/>
+    <param name="output_frame_id" value="map"/>
   </node>
 
 </launch>

@@ -12,8 +12,8 @@ import math
 MX_RANGE = 10
 
 FINAL_TARGET = Point()
-FINAL_TARGET.x = 1.0
-FINAL_TARGET.y = 1.0
+FINAL_TARGET.x = -1.0
+FINAL_TARGET.y = 5.0
 
 YAW_PRECISION = 5 * (math.pi / 180)  # 5 degrees
 DIST_PRECISION = 0.10

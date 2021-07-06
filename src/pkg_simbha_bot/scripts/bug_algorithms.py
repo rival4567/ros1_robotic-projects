@@ -45,7 +45,7 @@ class ObstacleAvoider(object):
             '/odom', Odometry, self.odom_callback)
 
         self.subscription = rospy.Subscriber(
-            '/scan', LaserScan, self.laserscan_callback)
+            '/simbha_bot/laser/scan', LaserScan, self.laserscan_callback)
 
         self.rate = rospy.Rate(20)
 
@@ -110,15 +110,44 @@ class ObstacleAvoider(object):
         self.publisher_.publish(self.velocity_msg)
         self.reached_destination = True
 
+    def quaternion_to_euler(self, x, y, z, w):
+
+        t0 = +2.0 * (w * x + y * z)
+        t1 = +1.0 - 2.0 * (x * x + y * y)
+        X = math.degrees(math.atan2(t0, t1))
+
+        t2 = +2.0 * (w * y - z * x)
+        t2 = +1.0 if t2 > +1.0 else t2
+        t2 = -1.0 if t2 < -1.0 else t2
+        Y = math.degrees(math.asin(t2))
+
+        t3 = +2.0 * (w * z + x * y)
+        t4 = +1.0 - 2.0 * (y * y + z * z)
+        Z = math.degrees(math.atan2(t3, t4))
+
+        return [X, Y, Z]
+
+    def euler_to_quaternion(self, r):
+        (yaw, pitch, roll) = (r[0], r[1], r[2])
+        qx = math.sin(roll/2) * math.cos(pitch/2) * math.cos(yaw/2) - \
+            math.cos(roll/2) * math.sin(pitch/2) * math.sin(yaw/2)
+        qy = math.cos(roll/2) * math.sin(pitch/2) * math.cos(yaw/2) + \
+            math.sin(roll/2) * math.cos(pitch/2) * math.sin(yaw/2)
+        qz = math.cos(roll/2) * math.cos(pitch/2) * math.sin(yaw/2) - \
+            math.sin(roll/2) * math.sin(pitch/2) * math.cos(yaw/2)
+        qw = math.cos(roll/2) * math.cos(pitch/2) * math.cos(yaw/2) + \
+            math.sin(roll/2) * math.sin(pitch/2) * math.sin(yaw/2)
+        return [qx, qy, qz, qw]
+
     def odom_callback(self, data):
-        quaternion = (data.pose.pose.orientation.x,
-                      data.pose.pose.orientation.y,
-                      data.pose.pose.orientation.z,
-                      data.pose.pose.orientation.w)
+        x = data.pose.pose.orientation.x
+        y = data.pose.pose.orientation.y
+        z = data.pose.pose.orientation.z
+        w = data.pose.pose.orientation.w
         self.curr_position = data.pose.pose.position
         self.pose = [data.pose.pose.position.x,
                      data.pose.pose.position.y,
-                     transformations.euler_from_quaternion(quaternion)[2]]
+                     self.quaternion_to_euler(x, y, z, w)[2]]
 
     def reach_goal(self):
 
@@ -126,10 +155,10 @@ class ObstacleAvoider(object):
             self.robot_state = 1
 
         if self.robot_state == 0:
-            if self.move_state is 0:
+            if self.move_state == 0:
                 self.fix_yaw(FINAL_TARGET)
                 rospy.loginfo('Fixing Heading to reach Target')
-            elif self.move_state is 1:
+            elif self.move_state == 1:
                 self.go_straight_ahead(FINAL_TARGET)
                 rospy.loginfo('Moving towards the Target')
 
@@ -193,7 +222,7 @@ class ObstacleAvoider(object):
 
     def take_action(self, regions):
 
-        if self.robot_state is 1:
+        if self.robot_state == 1:
             state_description = ''
             d = 1.5
             regions = self.check_sensors_for_nan(regions)
@@ -234,13 +263,13 @@ class ObstacleAvoider(object):
                 rospy.loginfo('Laser_scan_data: "%s"' % str(self.regions))
 
     def follow_wall(self):
-        if self.obstacle_avoidance_state is 0:
+        if self.obstacle_avoidance_state == 0:
             rospy.loginfo('Finding nearby wall')
             self.find_wall()
-        elif self.obstacle_avoidance_state is 1:
+        elif self.obstacle_avoidance_state == 1:
             rospy.loginfo('Turning Left')
             self.turn_left()
-        elif self.obstacle_avoidance_state is 2:
+        elif self.obstacle_avoidance_state == 2:
             rospy.loginfo('Following the wall')
             self.follow_the_wall()
 
