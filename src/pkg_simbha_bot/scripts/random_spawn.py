@@ -95,7 +95,7 @@ if __name__ == '__main__':
     cylinder_spawned = False
     while spawned_count < 3:
         pose1, pose2, pose3 = random_model_pose(
-            0.608564, 0.239278, 0.471279, 0.293995, -0.34, 0.74)
+            1.108564, 1.239278, 0.71279, 1.3995, 1.34, 1.24)
         if (3.0 < bot_pos.x < 6.0) and (1.0 < bot_pos.y < 4.0) and not sphere_spawned:
             rospy.loginfo("Spawning Sphere")
             req1 = create_model_request(

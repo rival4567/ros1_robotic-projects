@@ -39,9 +39,9 @@ class BowlingBall:
             if i < 5:
                 self.pub_x.publish(3.5)
             print(self.pos_y)
-            if self.pos_y < -0.0:
+            if self.pos_y < -0.1:
                 self.pub_y.publish(-0.5)
-            elif self.pos_y > -0.0:
+            elif self.pos_y > -0.1:
                 self.pub_y.publish(0.5)
             self.rate.sleep()
 

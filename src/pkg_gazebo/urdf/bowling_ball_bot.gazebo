@@ -17,7 +17,7 @@
         <maxVel value="0.2"/>
         <maxContacts>1</maxContacts>
         <minDepth>0.005</minDepth>
-        <material>Gazebo/Red</material>
+        <material>Gazebo/TurquoiseGlow</material>
         <turnGravityOff>false</turnGravityOff>
     </gazebo>
 </robot>
