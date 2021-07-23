@@ -41,7 +41,7 @@ def clbk_laser(msg):
         'p': msg.ranges[:],
     }
     # region['p'][0] represents the 0 degree and 0the value start from back and continues in anti-clockwise direction
-    for i in range(3):
+    for i in range(720):
         print(region['p'][i])
 
 
@@ -50,7 +50,7 @@ def main():
     sub_odom = rospy.Subscriber('/micromouse/odom', Odometry, clbk_odom)
     sub = rospy.Subscriber('/micromouse/laser/scan', LaserScan, clbk_laser)
     rospy.init_node('cmd_robot', anonymous=True)
-    rate = rospy.Rate(50)  # 40hz
+    rate = rospy.Rate(50)  # 50hz
 
     while not rospy.is_shutdown():
         msg1 = Twist()

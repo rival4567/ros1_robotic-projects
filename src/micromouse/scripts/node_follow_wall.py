@@ -37,10 +37,11 @@ def wall_follower_switch(req):
 def clbk_laser(msg):
     global regions_
     regions_ = {
-        # mapping from 0 to 2
-        'right':  msg.ranges[2]*10,
-        'front':  msg.ranges[1]*10,
-        'left':   msg.ranges[0]*10,
+        'right':  min(min(msg.ranges[0:71]), 10),
+        'fright': min(min(msg.ranges[72:143]), 10),
+        'front':  min(min(msg.ranges[144:215]), 10),
+        'fleft':  min(min(msg.ranges[216:287]), 10),
+        'left':   min(min(msg.ranges[288:359]), 10)
     }
 
     take_action()
@@ -62,31 +63,31 @@ def take_action():
 
     state_description = ''
 
-    d = 1.0
-
-    if regions['front'] > d and regions['left'] > d and regions['right'] > d:
+    d = 0.15
+    print(regions)
+    if regions['front'] > d and regions['fleft'] > d and regions['fright'] > d:
         state_description = 'case 1 - nothing'
         change_state(0)
-    elif regions['front'] < d and regions['left'] > d and regions['right'] > d:
+    elif regions['front'] < d and regions['fleft'] > d and regions['fright'] > d:
         state_description = 'case 2 - front'
         change_state(1)
-    elif regions['front'] > d and regions['left'] > d and regions['right'] < d:
-        state_description = 'case 3 - right'
+    elif regions['front'] > d and regions['fleft'] > d and regions['fright'] < d:
+        state_description = 'case 3 - fright'
         change_state(2)
-    elif regions['front'] > d and regions['left'] < d and regions['right'] > d:
-        state_description = 'case 4 - left'
+    elif regions['front'] > d and regions['fleft'] < d and regions['fright'] > d:
+        state_description = 'case 4 - fleft'
         change_state(0)
-    elif regions['front'] < d and regions['left'] > d and regions['right'] < d:
-        state_description = 'case 5 - front and right'
+    elif regions['front'] < d and regions['fleft'] > d and regions['fright'] < d:
+        state_description = 'case 5 - front and fright'
         change_state(1)
-    elif regions['front'] < d and regions['left'] < d and regions['right'] > d:
-        state_description = 'case 6 - front and left'
+    elif regions['front'] < d and regions['fleft'] < d and regions['fright'] > d:
+        state_description = 'case 6 - front and fleft'
         change_state(1)
-    elif regions['front'] < d and regions['left'] < d and regions['right'] < d:
-        state_description = 'case 7 - front and left and right'
+    elif regions['front'] < d and regions['fleft'] < d and regions['fright'] < d:
+        state_description = 'case 7 - front and fleft and fright'
         change_state(1)
-    elif regions['front'] > d and regions['left'] < d and regions['right'] < d:
-        state_description = 'case 8 - left and right'
+    elif regions['front'] > d and regions['fleft'] < d and regions['fright'] < d:
+        state_description = 'case 8 - fleft and fright'
         change_state(0)
     else:
         state_description = 'unknown case'

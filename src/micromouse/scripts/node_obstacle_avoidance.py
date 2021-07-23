@@ -9,10 +9,11 @@ pub = None
 
 def clbk_laser(msg):
     regions = {
-        # mapping laser data from 0 to 2
-        'right':  msg.ranges[2]*10,
-        'front':  msg.ranges[1]*10,
-        'left':   msg.ranges[0]*10,
+        'right':  min(min(msg.ranges[0:71]), 10),
+        'fright': min(min(msg.ranges[72:143]), 10),
+        'front':  min(min(msg.ranges[144:215]), 10),
+        'fleft':  min(min(msg.ranges[216:287]), 10),
+        'left':   min(min(msg.ranges[288:359]), 10)
     }
 
     take_action(regions)
@@ -25,36 +26,38 @@ def take_action(regions):
 
     state_description = ''
 
-    if regions['front'] > 1 and regions['left'] > 1 and regions['right'] > 1:
+    d = 0.15
+
+    if regions['front'] > d and regions['fleft'] > d and regions['fright'] > d:
         state_description = 'case 1 - nothing'
         linear_x = 0.6
         angular_z = 0
-    elif regions['front'] < 1 and regions['left'] > 1 and regions['right'] > 1:
+    elif regions['front'] < d and regions['fleft'] > d and regions['fright'] > d:
         state_description = 'case 2 - front'
         linear_x = 0
         angular_z = 0.3
-    elif regions['front'] > 1 and regions['left'] > 1 and regions['right'] < 1:
-        state_description = 'case 3 - right'
+    elif regions['front'] > d and regions['fleft'] > d and regions['fright'] < d:
+        state_description = 'case 3 - fright'
         linear_x = 0
         angular_z = 0.3
-    elif regions['front'] > 1 and regions['left'] < 1 and regions['right'] > 1:
-        state_description = 'case 4 - left'
+    elif regions['front'] > d and regions['fleft'] < d and regions['fright'] > d:
+        state_description = 'case 4 - fleft'
         linear_x = 0
         angular_z = -0.3
-    elif regions['front'] < 1 and regions['left'] > 1 and regions['right'] < 1:
-        state_description = 'case 5 - front and right'
+    elif regions['front'] < d and regions['fleft'] > d and regions['fright'] < d:
+        state_description = 'case 5 - front and fright'
         linear_x = 0
         angular_z = 0.3
-    elif regions['front'] < 1 and regions['left'] < 1 and regions['right'] > 1:
-        state_description = 'case 6 - front and left'
+    elif regions['front'] < d and regions['fleft'] < d and regions['fright'] > d:
+        state_description = 'case 6 - front and fleft'
         linear_x = 0
         angular_z = -0.3
-    elif regions['front'] < 1 and regions['left'] < 1 and regions['right'] < 1:
-        state_description = 'case 7 - front and left and right'
+    elif regions['front'] < d and regions['fleft'] < d and regions['fright'] < d:
+        state_description = 'case 7 - front and fleft and fright'
         linear_x = 0
         angular_z = 0.3
-    elif regions['front'] > 1 and regions['left'] < 1 and regions['right'] < 1:
-        state_description = 'case 8 - left and right'
+    elif regions['front'] > d and regions['fleft'] < d and regions['fright'] < d:
+        state_description = 'case 8 - fleft and fright'
         linear_x = 0.3
         angular_z = 0
     else:

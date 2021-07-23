@@ -13,11 +13,25 @@ pub = 0
 
 def clbk_laser(msg):
     global sensor_l, sensor_c, sensor_r
+    # 720 / 10 = 72
+    regions = [
+        round(100*min(min(msg.ranges[0:71]), 100)),
+        round(100*min(min(msg.ranges[72:143]), 100)),
+        round(100*min(min(msg.ranges[144:215]), 100)),
+        round(100*min(min(msg.ranges[216:287]), 100)),
+        round(100*min(min(msg.ranges[288:359]), 100)),
+        round(100*min(min(msg.ranges[360:431]), 100)),
+        round(100*min(min(msg.ranges[432:503]), 100)),
+        round(100*min(min(msg.ranges[504:575]), 100)),
+        round(100*min(min(msg.ranges[576:647]), 100)),
+        round(100*min(min(msg.ranges[648:719]), 100))
+    ]
+    # rospy.loginfo(regions)
+    print("l: {} \t c: {} \t r: {}".format(regions[4], regions[2], regions[0]))
 
-    # mapping laser data from 0 to 1
-    sensor_l = msg.ranges[0]*5
-    sensor_c = msg.ranges[1]*5
-    sensor_r = msg.ranges[2]*5
+    sensor_l = regions[4]
+    sensor_c = regions[2]
+    sensor_r = regions[0]
 
     # print("l: {} \t c: {} \t r: {}".format(sensor_l, sensor_c, sensor_r))
 
@@ -54,7 +68,7 @@ def main():
     rate = rospy.Rate(20)
     while not rospy.is_shutdown():
         print("l: {} \t c: {} \t r: {}".format(sensor_l, sensor_c, sensor_r))
-        if math.isinf(sensor_c):
+        if(sensor_c > 9):
             motion_go_straight()
         else:
             motion_stop()

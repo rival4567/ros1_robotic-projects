@@ -6,11 +6,18 @@ from sensor_msgs.msg import LaserScan
 
 
 def clbk_laser(msg):
-    # mapping from 0 to 1
+    # 720 / 10 = 72
     regions = [
-        msg.ranges[0]*5,
-        msg.ranges[1]*5,
-        msg.ranges[2]*5,
+        min(min(msg.ranges[0:71]), 10),
+        min(min(msg.ranges[72:143]), 10),
+        min(min(msg.ranges[144:215]), 10),
+        min(min(msg.ranges[216:287]), 10),
+        min(min(msg.ranges[288:359]), 10),
+        min(min(msg.ranges[360:431]), 10),
+        min(min(msg.ranges[432:503]), 10),
+        min(min(msg.ranges[504:575]), 10),
+        min(min(msg.ranges[576:647]), 10),
+        min(min(msg.ranges[648:719]), 10)
     ]
     rospy.loginfo(regions)
 
