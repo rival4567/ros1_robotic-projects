@@ -1,0 +1,44 @@
+<launch>
+
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="model" default="$(find micromouse)/urdf/micromouse_bot.urdf.xacro"/>
+  <arg name="extra_gazebo_args" default="--verbose"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find micromouse)/worlds/micromouse_world/micromouse_empty.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+  <rosparam file="$(find micromouse)/config/velocity_control.yaml" command="load"/>
+
+  <node name="controller_spawner" pkg ="controller_manager" type="spawner" ns="/micromouse" args="
+  left_wheel_joint_velocity_controller right_wheel_joint_velocity_controller joint_state_controller"/>
+  
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+        args="-x -1.35 -y 1.35 -z 0.03 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
+
+  <!-- <include file="$(find micromouse)/launch/rviz.launch" /> -->
+
+  <node name="node_maze_algorithms" pkg="micromouse" type="maze_algorithms.py" output="screen"/>
+  <node name="node_micromouse" pkg="micromouse" type="node_micromouse.py" output="screen"/>
+  <!-- Recording Bag File for Submission -->
+  <arg name="record" default="false"/>
+  <arg name="rec_name" default="mm.bag"/>
+
+  <group if="$(arg record)">
+    <node name="rosbag_record_pick" pkg="rosbag" type="record"
+    args="record -O $(find micromouse)/bag_files/$(arg rec_name) --chunksize=10 /micromouse/odom /micromouse/laser/scan" output="screen"/>
+  </group>
+</launch>
