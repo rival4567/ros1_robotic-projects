@@ -1,0 +1,5 @@
+Filename,Does bag files has rostopics?,Is spawned at correct position?,Remark,Simulation Time
+mm,True,True,Passed!,128.25
+mm4,True,True,"Failed!, maze not solved.",
+mm2,True,True,"Failed!, maze not solved.",
+mm3,True,True,"Failed!, maze not solved.",
