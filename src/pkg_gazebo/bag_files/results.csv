@@ -1,0 +1,4 @@
+Filename,Does bag files has rostopic?,Total Pins knocked,Strike,Remark
+bowling2,True,0,False,Failed!
+bowling,True,10,True,Strike! All pins knocked down
+bowling3,True,8,False,8 pins knocked down!

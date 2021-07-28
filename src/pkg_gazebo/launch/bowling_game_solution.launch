@@ -33,4 +33,13 @@
 
   <node name="node_bowling_pin_cam" pkg="pkg_gazebo" type="node_bowling_pin_cam.py"/>
 
+  <!-- Recording Bag File for Submission -->
+  <arg name="record" default="false"/>
+  <arg name="rec_name" default="bowling.bag"/>
+
+  <group if="$(arg record)">
+      <node name="rosbag_record_pick" pkg="rosbag" type="record"
+      args="record -O $(find pkg_gazebo)/bag_files/$(arg rec_name) --chunksize=10 /gazebo/link_states" output="screen"/>
+  </group>
+
 </launch>

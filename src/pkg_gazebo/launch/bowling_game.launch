@@ -6,11 +6,10 @@
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
-  <arg name="model" default="$(find pkg_gazebo)/urdf/bowling_ball_bot.urdf.xacro"/>
   <arg name="extra_gazebo_args" default="--verbose"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find pkg_gazebo)/worlds/bowling_game.world"/>
+    <arg name="world_name" value="$(find pkg_gazebo)/worlds/bowling_empty.world"/>
     <arg name="debug" value="$(arg debug)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)"/>
@@ -18,15 +17,5 @@
     <arg name="headless" value="$(arg headless)"/>
     <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)"/>
   </include>
-
-  <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
-  <rosparam file="$(find pkg_gazebo)/config/effort_control.yaml" command="load"/>
-
-  <node name="controller_spawner" pkg ="controller_manager" type="spawner" ns="/bowling_game" args="
-  x_effort_joint_controller y_effort_joint_controller z_effort_joint_controller joint_state_controller"/>
-  
-  <!-- push robot_description to factory and spawn robot in gazebo -->
-  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
-        args="-x 0 -y 0 -z 0.5 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
 
 </launch>
