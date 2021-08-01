@@ -1,6 +1,20 @@
 <launch>
     <rosparam file="$(find pkg_vb_solution)/config/config_env.yaml"/>
     <rosparam file="$(find pkg_vb_solution)/config/config_ur5.yaml"/>
+    <!-- Launch Simulation environment in Gazebo -->
     <include file="$(find pkg_vb_task)/launch/task_multiple_ur5.launch"/>
+
+    <!-- Launch the two ur5 arms with MoveIt! in RViz -->
+    <include file="$(find pkg_vb_sim)/launch/two_ur5_move_group.launch" />
+    
     <node name="node_sort_packages" pkg="pkg_vb_solution" type="node_sort_packages.py" output="screen"/>
+
+    <!-- Recording Bag File for Submission -->
+    <arg name="record" default="false"/>
+    <arg name="rec_name" default="vb.bag"/>
+
+    <group if="$(arg record)">
+        <node name="rosbag_record_pick" pkg="rosbag" type="record" args="record -O $(find pkg_vb_solution)/bag_files/$(arg rec_name) --chunksize=10 /eyrc/vb/ur5_1/vacuum_gripper/logical_camera/ur5_1 /eyrc/vb/ur5_2/vacuum_gripper/logical_camera/ur5_2" output="screen"/>
+    </group>
+    
 </launch>

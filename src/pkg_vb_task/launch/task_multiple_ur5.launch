@@ -19,9 +19,6 @@
         </include>
     </group>
 
-    <!-- Launch the two ur5 arms with MoveIt! in RViz -->
-    <include file="$(find pkg_vb_sim)/launch/two_ur5_move_group.launch" />
-
     <!-- Spawn Boxes -->
     <node name= "task_spawn_models" pkg= "pkg_vb_task" type="node_spawn_models.py"/>
 

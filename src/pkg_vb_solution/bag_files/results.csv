@@ -1,0 +1,5 @@
+Filename,Does bag files has rostopic?,Package detected by UR5_1,Package detected by UR5_2,Total Package detected,Successfully dropped by UR5_1,Successfully dropped by UR5_2,Total Dropped,Simulation Time,Is Passed,Remark
+vb1,True,"['packagen00', 'packagen01', 'packagen02', 'packagen10', 'packagen11', 'packagen12']","['packagen01', 'packagen10', 'packagen12']",9,"['packagen00', 'packagen02', 'packagen11']","['packagen01', 'packagen10', 'packagen12']",6,120.704,True,Passed! All packages are sorted.
+vb3,True,"['packagen00', 'packagen02']",['packagen01'],3,"['packagen00', 'packagen02']",['packagen01'],3,58.193,False,Only 3 packages are sorted correctly.
+vb2,False,[],[],0,[],[],0,,False,Failed!
+vb,True,"['packagen00', 'packagen02', 'packagen10', 'packagen11']","['packagen01', 'packagen10', 'packagen12']",7,"['packagen00', 'packagen02', 'packagen11']","['packagen01', 'packagen10', 'packagen12']",6,106.203,True,Passed! All packages are sorted.
