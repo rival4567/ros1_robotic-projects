@@ -56,6 +56,7 @@ def main():
             is_topic_present = False
             dest_reached = False
             collision = False
+            is_spawned_correctly = False
             pos_time_list = []
             time_taken = None
             # look throuhg topics

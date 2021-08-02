@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+'''
+Spawn shapes at with random position and orientation when the simbhabot reaches
+some specific location. This will prevent hard coding.
+'''
+
+
 import rospy
 import time
 from gazebo_msgs.srv import SpawnModel, SpawnModelRequest, SpawnModelResponse

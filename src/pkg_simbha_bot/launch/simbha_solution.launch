@@ -1,0 +1,19 @@
+<launch>
+
+  <include file = "$(find pkg_simbha_bot)/launch/simbha_task.launch" />
+  <include file = "$(find pkg_simbha_bot)/launch/rviz.launch" />
+  <!-- <include file = "$(find pkg_simbha_bot)/launch/octomap.launch" /> -->
+  <!-- <include file = "$(find pkg_simbha_bot)/launch/depthimage_to_laserscan.launch" /> -->
+
+  <node name="node_bug0" type="bug0_algorithm.py" pkg="pkg_simbha_bot" output="screen" />
+
+  <!-- Recording Bag File for Submission -->
+  <arg name="record" default="false"/>
+  <arg name="rec_name" default="sm.bag"/>
+
+  <group if="$(arg record)">
+      <node name="rosbag_record_pick" pkg="rosbag" type="record"
+  args="record -O $(find pkg_simbha_bot)/bag_files/$(arg rec_name) --chunksize=10 /odom /scan" output="screen"/>
+  </group>
+
+</launch>

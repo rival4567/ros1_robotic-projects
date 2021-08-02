@@ -1,8 +1,0 @@
-<launch>
-
-  <include file = "$(find pkg_simbha_bot)/launch/simbha_task.launch" />
-  <include file = "$(find pkg_simbha_bot)/launch/rviz.launch" />
-  <!-- <include file = "$(find pkg_simbha_bot)/launch/octomap.launch" /> -->
-  <!-- <include file = "$(find pkg_simbha_bot)/launch/depthimage_to_laserscan.launch" /> -->
-
-</launch>

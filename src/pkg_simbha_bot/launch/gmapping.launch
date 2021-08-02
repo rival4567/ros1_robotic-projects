@@ -1,6 +1,6 @@
 <launch>
-  <arg name="scan_topic"  default="/m2wr/laser/scan" />
-  <arg name="base_frame"  default="link_chassis"/>
+  <arg name="scan_topic"  default="/scan" />
+  <arg name="base_frame"  default="base_link"/>
   <arg name="odom_frame"  default="odom"/>
 
   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">

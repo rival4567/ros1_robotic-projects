@@ -452,7 +452,7 @@
             </range>
         </ray>
         <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
-            <topicName>/simbha_bot/laser/scan</topicName>
+            <topicName>/scan</topicName>
             <frameName>kinect_link</frameName>
         </plugin>
         </sensor>
